@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <title>فیلم ها</title>
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/bootstrap.rtl.css" %}">
+</head>
+
+<body lang="fa" dir="rtl">
+<div class="container" style="background-color: #0c5460">
+    <div class="row align-content-center">
+        <div class="col bg-dark text-white text-center" >
+            <h1 class="h1 text-center text-white">سیستم فروش بلیت سینما</h1>
+            <h2 class="h2 text-left text-warning">فیلم ها</h2>
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="col">
+
+        <nav class=" navbar navbar-expand-sm navbar-dark text-white" style="background-color:#533f03 ">
+
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "ticketing:cinema_list" %}">
+                        سینماها
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "ticketing:showtime_list" %}">
+                        سانس ها
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    </div>
+        {% if movie_list %}
+            <ul>
+                {% for m in movie %}
+                    <li>
+                        {{ m }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-light">متاسفانه فیملی یافت نشد</p>
+        {% endif %}
+
+        <script src="{% static "ticketing/js/jquery-3.5.1.min.js" %}"></script>
+        <script src="{% static "ticketing/js/bootstrap.bundle.js" %}"></script>
+
+        <div class="row align-content-center">
+            <div class="col text-white text-center" style="background-color: #491217">
+                &nbsp
+                <p class="text-white"> نام و نام خانوادگی : رضا فرجی</p>
+                <p class="text-white"> استاد راهنما : آقای مهندس نوید حاتمی</p>
+                <p>پروژه پایانی کارشناسی</p>
+                <p>پاییز و زمستان 1399</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

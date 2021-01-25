@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>سینماها</title>
+
+</head>
+<body dir="rtl">
+<h1>سیستم فروش بلیت سینما</h1>
+<h2>سینماها</h2>
+<ul>
+
+    <li>
+        <a href="{% url "ticketing:movie_list" %}">
+        فیلمها
+        </a>
+    </li>
+    <li>
+        <a href="{% url "ticketing:showtime_list" %}">
+        سانسها
+        </a>
+    </li>
+
+</ul>
+{% if cinema_list %}
+    <ul>
+        {% for c in cinema %}
+            <li>
+                {{ c }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p style="color: #ff0000">متاسفانه سینمایی یافت نشد</p>
+{% endif %}
+</body>
+</html>
