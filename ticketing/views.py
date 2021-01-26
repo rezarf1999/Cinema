@@ -29,15 +29,15 @@ def showtime_list(request):
 
 
 def movie_details(request, movie_id):
-    movie = get_object_or_404(Movie, id=movie_id)
+    movie = get_object_or_404(Movie, pk=movie_id)
     context = {
-        'cinema': movie
+        'movie': movie
     }
-    render(request, 'ticketing/movie_details.html', context)
+    return render(request, 'ticketing/movie_details.html', context)
 
 
 def cinema_details(request, cinema_id):
-    cinema = get_object_or_404(Cinema, id=cinema_id)
+    cinema = get_object_or_404(Cinema, pk=cinema_id)
     context = {
         'cinema': cinema
     }

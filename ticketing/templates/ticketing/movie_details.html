@@ -1,24 +1,90 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <title>مشخصات فیلم</title>
-    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/bootstrap.rtl.css" %}">
+    <title>مشخصات فیلم ها</title>
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/bootstrap.css" %}">
 </head>
-<body>
-<div class="container" style="background-color: #0c5460">
-
-{#header#}
-    <div class="row align-content-center">
-        <div class="col bg-dark text-white text-center">
-            <h1 class="h1 text-center text-white">سیستم فروش بلیت سینما</h1>
-            <h2 class="h2 text-left text-warning">مشخصات فیلم</h2>
+<body lang="fa" dir="rtl">
+<div class="jumbotron" style="margin-top:30px">
+    <div class="text-dark" style="height: 60px">
+        <h1 class="h1 text-center">سیستم فروش بلیت سینما</h1>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <hr>
         </div>
     </div>
 
 
+    <a href="{% url "ticketing:movie_list" %}" class="btn btn-info" role="button">
+        برگشت به صفحه فیلم ها
+    </a>
 
+    <br>
+    <br>
+    <div class="row text-dark">
+        <div class="col-sm-8">
+            <h3>
+                {{ movie.name }}
+            </h3>
+            <br>
 
+            <div class="form-group">
+
+                <label for="director">
+                    <b>
+                        کارگردان :
+                    </b>
+                </label>
+                <output type="text">{{ movie.director }}</output>
+                <br>
+                <label for="year">
+                    <b>
+                        سال ساخت :
+                    </b>
+                </label>
+                <output type="text">{{ movie.year }}</output>
+                <br>
+                <label for="time">
+                    <b>
+                        مدت زمان فیلم :
+                    </b>
+                </label>
+                <output type="text">
+                    {{ movie.length }}
+                    دقیقه
+                </output>
+                <br>
+                <label for="description">
+                    <b>
+                        توضیحات فیلم:
+                    </b>
+                </label>
+                <textarea class="form-control font-weight-bold" rows="5" style="width: 70%; resize: none"
+                          disabled>{{ movie.description }}</textarea>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <img src="{{ movie.cover.url }}" alt="کاور فیلم" class="img-thumbnail" style="box-sizing: border-box;width: 300px;height: 400px">
+        </div>
+    </div>
+
+    <div class="row align-content-center">
+        <div class="col text-white text-center" style="background-color: #491217">
+
+            <p class="text-white">محل قرار دادن تبلیغات</p>
+
+        </div>
+    </div>
 </div>
+
+
+<script src="{% static "ticketing/js/jquery-3.5.1.min.js" %}"></script>
+<script src="{% static "ticketing/js/bootstrap.js" %}"></script>
+
 </body>
 </html>

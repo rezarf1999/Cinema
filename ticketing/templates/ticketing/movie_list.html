@@ -5,66 +5,89 @@
 <head>
     <meta charset="UTF-8">
     <title>فیلم ها</title>
-    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/bootstrap.rtl.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/bootstrap.css" %}">
 </head>
-
 <body lang="fa" dir="rtl">
-<div class="container" style="background-color: #0c5460">
-    <div class="row align-content-center">
-        <div class="col bg-dark text-white text-center" >
-            <h1 class="h1 text-center text-white">سیستم فروش بلیت سینما</h1>
-            <h2 class="h2 text-left text-warning">فیلم ها</h2>
+<div class="container" style="margin-top:30px;background-color:#062c33 ">
+    <div class="jumbotron">
+        <h1 class="h1 text-center">سیستم فروش بلیت سینما</h1>
+    </div>
+
+    <nav class="navbar-light navbar-expand-sm text-dark" style="background-color:silver ">
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+
+            <a class="nav-link" href="{% url "ticketing:cinema_list" %}">
+                <li class="nav-item">
+
+                    <b>
+                        سینماها
+                    </b>
+
+                </li>
+            </a>
+
+            <a class="nav-link" href="{% url "ticketing:showtime_list" %}">
+                <li class="nav-item">
+                    <b>
+                        سانس ها
+                    </b>
+                </li>
+            </a>
+
+        </ul>
+    </nav>
+
+    <br>
+    <div class="row">
+        <div class="col-sm-4 text-white">
+            <h4>فهرست فیلم ها</h4>
         </div>
     </div>
-
     <div class="row">
-    <div class="col">
+        <div class="col-sm-8">
 
-        <nav class=" navbar navbar-expand-sm navbar-dark text-white" style="background-color:#533f03 ">
+            {% if movie %}
+                <ul class="list-group">
 
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url "ticketing:cinema_list" %}">
-                        سینماها
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url "ticketing:showtime_list" %}">
-                        سانس ها
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                    {% for m in movie %}
+
+                        <a class="card-link text-warning" href="{% url "ticketing:movie_details" movie_id=m.pk %}">
+                            <li class="list-group-item">
+                                <b>
+                                    {{ m.name }}
+                                    {{ m.year }}
+                                </b>
+                            </li>
+                        </a>
+
+                    {% endfor %}
+                </ul>
+            {% else %}
+
+                <p class="text-light">متاسفانه فیملی یافت نشد</p>
+            {% endif %}
+        </div>
+        <div class="col-sm-4 text-white">
+            محل قرار گیری تبلیغات
+        </div>
     </div>
-    </div>
-        {% if movie_list %}
-            <ul>
-                {% for m in movie %}
-                    <li>
-                        {{ m }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="text-light">متاسفانه فیملی یافت نشد</p>
-        {% endif %}
+    <br>
+    <div class="row align-content-center">
+        <div class="col text-white text-center" style="background-color: #491217">
 
-        <script src="{% static "ticketing/js/jquery-3.5.1.min.js" %}"></script>
-        <script src="{% static "ticketing/js/bootstrap.bundle.js" %}"></script>
+            <p class="text-white"> نام و نام خانوادگی : رضا فرجی</p>
+            <p class="text-white"> استاد راهنما : آقای مهندس نوید حاتمی</p>
+            <p>پروژه پایانی کارشناسی</p>
+            <p>پاییز و زمستان 1399</p>
 
-        <div class="row align-content-center">
-            <div class="col text-white text-center" style="background-color: #491217">
-                &nbsp
-                <p class="text-white"> نام و نام خانوادگی : رضا فرجی</p>
-                <p class="text-white"> استاد راهنما : آقای مهندس نوید حاتمی</p>
-                <p>پروژه پایانی کارشناسی</p>
-                <p>پاییز و زمستان 1399</p>
-
-            </div>
         </div>
     </div>
 </div>
+<script src="{% static "ticketing/js/jquery-3.5.1.min.js" %}"></script>
+<script src="{% static "ticketing/js/bootstrap.js" %}"></script>
+
 </body>
 
 </html>

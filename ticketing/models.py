@@ -10,7 +10,7 @@ class Movie(models.Model):
 
     name = models.CharField('نام فیلم', max_length=100)
     director = models.CharField('کارگردان', max_length=50)
-    cover = models.ImageField('عکس', upload_to='files/Movie_Covers', null=False, blank=False)
+    cover = models.ImageField('عکس', upload_to='Movie_Covers/', null=False, blank=False)
     length = models.IntegerField('مدت فیلم')
     year = models.IntegerField('سال ساخت')
     description = models.TextField('توضیحات')
@@ -27,7 +27,7 @@ class Cinema(models.Model):
     capacity = models.IntegerField('ظرفیت سینما')
     city = models.CharField('شهر', max_length=50, default='تهران')
     phone = models.CharField('شماره تماس', max_length=20, null=True)
-    image = models.ImageField('عکس', upload_to='files/Cinema_Images', null=False, blank=False)
+    image = models.ImageField('عکس', upload_to='Cinema_Images/', null=False, blank=False)
     address = models.TextField('آدرس')
 
 
