@@ -13,7 +13,7 @@ admin.site.register(Movie, MovieAdmin)
 
 
 class CinemaAdmin(admin.ModelAdmin):
-    list_filter =['name', 'capacity', 'city']
+    list_filter = ['name', 'capacity', 'city']
     search_fields = ['name', 'city']
     list_display = ['name', 'capacity', 'city']
 

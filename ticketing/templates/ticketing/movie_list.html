@@ -43,26 +43,56 @@
     <div class="row">
         <div class="col-sm-4 text-white">
             <h4>فهرست فیلم ها</h4>
+            <br>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-8">
 
             {% if movie %}
-                <ul class="list-group">
-
-                    {% for m in movie %}
-
-                        <a class="card-link text-warning" href="{% url "ticketing:movie_details" movie_id=m.pk %}">
-                            <li class="list-group-item">
+                <ul class="">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-4">
                                 <b>
-                                    {{ m.name }}
-                                    {{ m.year }}
+                                    نام فیلم
                                 </b>
-                            </li>
-                        </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <b>
+                                    کارگردان
+                                </b>
+                            </div>
+                            <div class="col-sm-4">
+                                <b>
+                                    سال ساخت
+                                </b>
+                            </div>
+                        </div>
+                        {% for m in movie %}
 
-                    {% endfor %}
+                            </li>
+                            <a class="list-group-item text-info" href="{% url "ticketing:movie_details" movie_id=m.pk %}">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            {{ m.name }}
+                                        </div>
+                                        <div class="col-sm-4">
+                                            {{ m.year }}
+                                        </div>
+                                        <div class="col-sm-4">
+                                            {{ m.director }}
+                                        </div>
+                                    </div>
+                                    <b>
+
+
+                                    </b>
+                                </li>
+                            </a>
+
+                        {% endfor %}
                 </ul>
             {% else %}
 
