@@ -27,7 +27,7 @@ class Cinema(models.Model):
     capacity = models.IntegerField('ظرفیت سینما')
     city = models.CharField('شهر', max_length=50, default='تهران')
     phone = models.CharField('شماره تماس', max_length=20, null=True)
-    image = models.ImageField('عکس', upload_to='Cinema_Images/', null=False, blank=False)
+    image = models.ImageField('عکس', upload_to='Cinema_Images/', null=True, blank=True)
     address = models.TextField('آدرس')
 
 

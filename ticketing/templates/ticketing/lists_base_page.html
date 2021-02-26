@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+
+
+    <style>
+
+    </style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<div class="container-fluid" style="background-color: #dae0e5">
+    <nav class="justify-content navbar fixed-top navbar-expand-md navbar-dark" style="background-color: #164A41">
+        <a class="navbar-brand" href="#">{% block content_title %}{% endblock %}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto" style="font-family: Iranian Sans">
+                {% block buttons %}{% endblock %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="justify-content jumbotron text-center" style="background-color:#062c33 ; color: white">
+        <h1>سیستم فروش بلیط سینما</h1>
+    </div>
+
+
+    <div class="row jumbotron" style="background-color: darkslategrey" dir="rtl">
+        <div class="col-sm-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <div class="col-sm-4 jumbotron">
+            <div class="toggle-nav-sidebar">
+                {% block side_bar %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="container-fluid text-center text-white" style="background-color: #203647; color: black">
+        <p></p> <b> نام و نام خانوادگی : رضا فرجی</b></p>
+        <p></p> <b>استاد راهنما : آقای مهندس نوید حاتمی</b></p>
+        <p></p><b>پروژه پایانی کارشناسی</b></p>
+        <p></p><b>پاییز و زمستان 1399</b></p>
+    </footer>
+</div>
+<script src="{% static "ticketing/js/My-js.js" %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

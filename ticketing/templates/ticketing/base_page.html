@@ -1,12 +1,113 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body style="background-color: orange">
-<h1>This is heading 1</h1>
 
-<p style="color: midnightblue">This site was designed by Reza Faraji</p>
+    <title>فیلم ها</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/webfonts/Iranian Sans.ttf" %}">
+    <style>
+
+    </style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<div style="background-color: #dae0e5">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark" style="background-color: #164A41">
+        <a class="navbar-brand" href="#">صفحه فیلم ها</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto" style="font-family: Iranian Sans">
+
+                <li class="nav-item"><a class="nav-link" href="{% url "ticketing:showtime_list" %}">سانس ها</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url "ticketing:cinema_list" %}">سینماها</a></li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron text-center" style="background-color:#062c33 ; color: white">
+        <h1>سیستم فروش بلیط سینما</h1>
+    </div>
+
+
+    <div class="row jumbotron" style="background-color: darkslategrey" dir="rtl">
+        <div class="col-sm-8">
+
+            {% if movie %}
+                <ul class="list-group">
+                    <li class="list-group-item bg-dark text-white text-center">
+                        <div class="row">
+                            <div class="col-sm-4 text-center">
+                                <b>
+                                    نام فیلم
+                                </b>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <b>
+                                    کارگردان
+                                </b>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <b>
+                                    سال ساخت
+                                </b>
+                            </div>
+                        </div>
+                    </li>
+                    {% for m in movie %}
+
+                        <a class="list-group-item text-info" href="{% url "ticketing:movie_details" movie_id=m.pk %}">
+                            <li class="list-group-item bg-secondary text-white">
+                                <div class="row">
+                                    <div class="col-sm-4 text-center">
+                                        {{ m.name }}
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        {{ m.director }}
+
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        {{ m.year }}
+
+                                    </div>
+                                </div>
+                            </li>
+                        </a>
+
+                    {% endfor %}
+                </ul>
+            {% else %}
+
+                <p class="text-light">فیلمی موجود نیست</p>
+            {% endif %}
+        </div>
+        <div class="col-sm-4 jumbotron">
+            <div class="toggle-nav-sidebar">
+                <a class="nav-item" href="#">
+                    درباره پروژه
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="container-fluid text-center text-white" style="background-color: #203647; color: black">
+        <p></p> <b> نام و نام خانوادگی : رضا فرجی</b></p>
+        <p></p> <b>استاد راهنما : آقای مهندس نوید حاتمی</b></p>
+        <p></p><b>پروژه پایانی کارشناسی</b></p>
+        <p></p><b>پاییز و زمستان 1399</b></p>
+    </footer>
+</div>
+<script src="{% static "ticketing/js/My-js.js" %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>
