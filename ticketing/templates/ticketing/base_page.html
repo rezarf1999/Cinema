@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
 
     <title>فیلم ها</title>
@@ -9,53 +9,83 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "ticketing/webfonts/Iranian Sans.ttf" %}">
-    <style>
 
-    </style>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-<div style="background-color: #dae0e5">
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark" style="background-color: #164A41">
-        <a class="navbar-brand" href="#">صفحه فیلم ها</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+<body id="myPage" data-spy="scroll" data-offset="60">
+<div style="background-color: #dae0e5;font-family: 'Iranian Sans'">
+
+    <nav dir="rtl" class="navbar fixed-top navbar-expand-lg bg-dark navbar-dark" style="font-family: 'Iranian Sans';">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav ml-auto" style="font-family: Iranian Sans">
+        <a class="navbar-brand" href="#">Cinema Ticket Online(CTO)</a>
+
+        <div style="font-size: medium" class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto-auto mt-2 mt-lg-0 justify-content">
 
                 <li class="nav-item"><a class="nav-link" href="{% url "ticketing:showtime_list" %}">سانس ها</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url "ticketing:cinema_list" %}">سینماها</a></li>
 
 
             </ul>
+            <form class="form-inline my-2 my-lg-0 text-right">
+                <input class="form-control mr-sm-2" dir="rtl" type="search" placeholder="جستجو.." aria-label="Search">&nbsp;
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">جستجو</button>
+            </form>
         </div>
+
     </nav>
 
-    <div class="jumbotron text-center" style="background-color:#062c33 ; color: white">
-        <h1>سیستم فروش بلیط سینما</h1>
+
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block w3-card text-light"
+         style="text-align: right; width:24.7%;right:0;background-color: #203647">
+        <h3 class="w3-bar-item" style="text-align: right">منو</h3>
+
+        <a href="{% url "ticketing:cin" %}" class="w3-bar-item w3-button" style="text-align: right;">نظرات</a>
+        <a href="#" class="w3-bar-item w3-button" style="text-align: right;">صفحه اصلی</a>
+        <a href="#" class="w3-bar-item w3-button" style="text-align: right;">About</a>
+
     </div>
+    <div style="margin-right: 24.8%;margin-top:5.2%">
+
+        <div class="card mb-1 bg-dark text-white">
+            <img class="card-img" style="height: 200px" src="{% static 'main_picture/main.png' %}" alt="Card image">
+            <div class="card-img-overlay text-right">
+                <h3 class="card-title">سیستم فروش بلیط سینما</h3>
+                <br>
+                <h5 class="card-text" dir="rtl"> خرید آسان بلیت سینما با
+                    <i><b>CTO</b></i>
+                </h5>
+
+            </div>
+        </div>
 
 
-    <div class="row jumbotron" style="background-color: darkslategrey" dir="rtl">
-        <div class="col-sm-8">
+        <div class="jumbotron" style="background-color: darkslategrey" dir="rtl">
+
 
             {% if movie %}
                 <ul class="list-group">
-                    <li class="list-group-item bg-dark text-white text-center">
+                    <li class="list-group-item bg-light text-dark text-center">
                         <div class="row">
-                            <div class="col-sm-4 text-center">
+                            <div class="col py-4 text-dark bg-light text-center">
                                 <b>
                                     نام فیلم
                                 </b>
                             </div>
-                            <div class="col-sm-4 text-center">
+                            <div class="col py-4 text-center">
                                 <b>
                                     کارگردان
                                 </b>
                             </div>
-                            <div class="col-sm-4 text-center">
+                            <div class="col py-4 text-center">
                                 <b>
                                     سال ساخت
                                 </b>
@@ -64,7 +94,8 @@
                     </li>
                     {% for m in movie %}
 
-                        <a class="list-group-item text-info" href="{% url "ticketing:movie_details" movie_id=m.pk %}">
+                        <a class="list-group-item text-info"
+                           href="{% url "ticketing:movie_details" movie_id=m.pk %}">
                             <li class="list-group-item bg-secondary text-white">
                                 <div class="row">
                                     <div class="col-sm-4 text-center">
@@ -88,26 +119,22 @@
 
                 <p class="text-light">فیلمی موجود نیست</p>
             {% endif %}
-        </div>
-        <div class="col-sm-4 jumbotron">
-            <div class="toggle-nav-sidebar">
-                <a class="nav-item" href="#">
-                    درباره پروژه
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <footer id="footer" class="container-fluid text-center text-white" style="background-color: #203647; color: black">
-        <p></p> <b> نام و نام خانوادگی : رضا فرجی</b></p>
-        <p></p> <b>استاد راهنما : آقای مهندس نوید حاتمی</b></p>
-        <p></p><b>پروژه پایانی کارشناسی</b></p>
-        <p></p><b>پاییز و زمستان 1399</b></p>
-    </footer>
+        </div>
+
+        <footer class="modal-footer text-center bg-light text-dark"
+        >
+            <p></p> <b> نام و نام خانوادگی : رضا فرجی</b></p>
+            <p></p> <b>استاد راهنما : آقای مهندس نوید حاتمی</b></p>
+            <p></p><b>پروژه پایانی کارشناسی</b></p>
+            <p></p><b>پاییز و زمستان 1399</b></p>
+        </footer>
+    </div>
 </div>
 <script src="{% static "ticketing/js/My-js.js" %}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

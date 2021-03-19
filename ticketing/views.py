@@ -42,3 +42,18 @@ def cinema_details(request, cinema_id):
         'cinema': cinema
     }
     return render(request, 'ticketing/cinema_details.html', context)
+
+
+def showtime_list(request):
+    showtime = ShowTime.objects.all()
+    context = {
+        'showtime': showtime
+    }
+    return render(request, 'ticketing/showtime_list.html', context)
+
+
+def cin(request):
+    context = {
+
+    }
+    return render(request, 'ticketing/test.html', context)

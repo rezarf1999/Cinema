@@ -1,27 +1,9 @@
 body {
     line-height: 1.8;
     color: #818181;
+
 }
 
-h2 {
-    font-size: 24px;
-    text-transform: uppercase;
-    color: #303030;
-    font-weight: 600;
-    margin-bottom: 30px;
-}
-
-h4 {
-    font-size: 19px;
-    line-height: 1.375em;
-    color: #303030;
-    font-weight: 400;
-    margin-bottom: 30px;
-}
-
-.jumbotron {
-    font-family: Montserrat, Iranian Sans;
-}
 
 
 .thumbnail {
@@ -57,16 +39,7 @@ h4 {
     color: #f4511e;
 }
 
-.panel-heading {
-    color: #fff !important;
-    background-color: #f4511e !important;
-    padding: 25px;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
+
 
 .panel-footer {
     background-color: white !important;
@@ -87,29 +60,7 @@ h4 {
     color: #fff;
 }
 
-.navbar {
-    margin-bottom: 0;
-    z-index: 9999;
-    border: 0;
-    font-size: 15px !important;
-    line-height: 1.42857143 !important;
-    border-radius: 0;
-    font-family: Montserrat, Iranian Sans;
-}
 
-.navbar li a, .navbar .navbar-brand {
-    color: #fff !important;
-}
-
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    color: black !important;
-    background-color: #fff !important;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
-}
 
 footer .glyphicon {
     font-size: 20px;
@@ -125,7 +76,6 @@ footer .glyphicon {
     -webkit-animation-duration: 1s;
     visibility: visible;
 }
-
 
 
 @keyframes slide {
@@ -167,6 +117,21 @@ footer .glyphicon {
         font-size: 150px;
     }
 }
+
+.m-bar-block -bar-item{width:100%;display:block;padding:8px 16px;text-align:left;border:none;white-space:normal;float:none;outline:0}
+.search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
 
 
 
