@@ -9,7 +9,7 @@ def movie_list(request):
     context = {
         'movie': movies
     }
-    return render(request, 'ticketing/base_page.html', context)
+    return render(request, 'ticketing/movie_list.html', context)
 
 
 def cinema_list(request):
@@ -57,3 +57,10 @@ def cin(request):
 
     }
     return render(request, 'ticketing/test.html', context)
+
+
+def login(request):
+    context = {
+
+    }
+    return render(request, 'ticketing/login.html', context)

@@ -11,4 +11,5 @@ urlpatterns = [
     path('cinema/details/<int:cinema_id>', views.cinema_details, name='cinema_details'),
     path('movise/list/', views.movie_list, name='movie_list'),
     path('cin', views.cin, name='cin'),
+    path('login', views.login, name='login'),
 ]

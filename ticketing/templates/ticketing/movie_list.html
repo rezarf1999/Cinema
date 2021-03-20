@@ -1,4 +1,4 @@
-{% extends "ticketing/lists_base_page.html" %}
+{% extends "ticketing/base_page.html" %}
 
 {% block title %}
     فیلم ها
@@ -11,56 +11,49 @@
 {% endblock %}
 
 {% block buttons %}
-    <li class="nav-item"><a class="nav-link" href="{% url "ticketing:cinema_list" %}">سینماها</a></li>
-    <li class="nav-item"><a class="nav-link" href="{% url "ticketing:showtime_list" %}">سانس ها</a></li>
+    <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i
+            class="fas fa-building fa-flip-horizontal mr-1"></i>سینماها</button>
+    <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i
+            class="fas fa-film fa-flip-horizontal mr-1"></i>فیلم ها</button>
+
+{#    <li class="nav-item btn-outline-info"><a class="nav-link text-light p-2" style=""#}
+{#                                             href="{% url "ticketing:showtime_list" %}">سانس ها</a></li>#}
+{#    <li class="nav-item"><a class="nav-link text-light p-2" href="{% url "ticketing:cinema_list" %}">#}
+{##}
+{#        سینماها</a></li>#}
 {% endblock %}
 
 {% block content %}
-    {% if movie %}
-        <ul class="list-group">
-            <li class="list-group-item bg-dark text-white text-center">
+    <div class="row p-2">
+        <div class="col">
+            {% if movie %}
                 <div class="row">
-                    <div class="col-sm-4 text-center">
-                        <b>
-                            نام فیلم
-                        </b>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <b>
-                            کارگردان
-                        </b>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <b>
-                            سال ساخت
-                        </b>
-                    </div>
-                </div>
-            </li>
-            {% for m in movie %}
-
-                <a class="list-group-item text-info" href="{% url "ticketing:movie_details" movie_id=m.pk %}">
-                    <li class="list-group-item bg-secondary text-white">
-                        <div class="row">
-                            <div class="col-sm-4 text-center">
-                                {{ m.name }}
+                    {% for m in movie %}
+                        <div class="col-md-4" dir="rtl">
+                            <div class="card mb-4 border-dark" style="text-align: right">
+                                <img class="card-img-top" src="{{ m.cover.url }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ m.name }}</h5>
+                                    <p class="card-text">
+                                        کارگردان :
+                                        {{ m.director }}
+                                    </p>
+                                    <p class="card-text">
+                                        سال ساخت :
+                                        {{ m.year }}
+                                    </p>
+                                    <a href="{% url "ticketing:movie_details" movie_id=m.pk %}"
+                                       class="btn btn-dark btn-sm">
+                                        بیشتر...</a>
+                                </div>
                             </div>
-                            <div class="col-sm-4 text-center">
-                                {{ m.director }}
 
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                {{ m.year }}
-
-                            </div>
                         </div>
-                    </li>
-                </a>
-
-            {% endfor %}
-        </ul>
-    {% else %}
-
-        <p class="text-light">فیلمی موجود نیست</p>
-    {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-light">فیلمی موجود نیست</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

@@ -17,9 +17,10 @@
     <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
 </head>
 <body id="myPage" data-spy="scroll" data-offset="60">
-<div style="background-color: #dae0e5;font-family: 'Iranian Sans'">
+<div style="width: 100%; background-color: #dae0e5;font-family: 'Iranian Sans'">
 
-    <nav dir="rtl" class="navbar fixed-top navbar-expand-lg bg-dark navbar-dark" style="font-family: 'Iranian Sans';">
+    <nav class="navbar fixed-top navbar-expand-lg bg-dark navbar-dark ml-auto w-100"
+         style="font-family: 'Iranian Sans';">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,17 +28,19 @@
         <a class="navbar-brand" href="#">Cinema Ticket Online(CTO)</a>
 
         <div style="font-size: medium" class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto-auto mt-2 mt-lg-0 justify-content">
+            <form class="form-inline my-2 my-lg-0 text-right ml-auto" style="margin-right: 35%">
 
-                <li class="nav-item"><a class="nav-link" href="{% url "ticketing:showtime_list" %}">سانس ها</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url "ticketing:cinema_list" %}">سینماها</a></li>
+                    <button class="btn btn-outline-dark my-2 my-sm-0 bg-light" type="submit"><i
+                            class="fas fa-search fa-flip-horizontal"></i></button>
+                    <input class="form-control " dir="rtl" type="search" placeholder="جستجو.." aria-label="Search">
 
+            </form>
+            <ul class="navbar-nav mt-2 mt-lg-0 mr-2 justify-content">
+
+                {% block buttons %}{% endblock %}
 
             </ul>
-            <form class="form-inline my-2 my-lg-0 text-right">
-                <input class="form-control mr-sm-2" dir="rtl" type="search" placeholder="جستجو.." aria-label="Search">&nbsp;
-                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">جستجو</button>
-            </form>
+
         </div>
 
     </nav>
@@ -49,14 +52,14 @@
         <h3 class="w3-bar-item" style="text-align: right">منو</h3>
 
         <a href="{% url "ticketing:cin" %}" class="w3-bar-item w3-button" style="text-align: right;">نظرات</a>
-        <a href="#" class="w3-bar-item w3-button" style="text-align: right;">صفحه اصلی</a>
+        <a href="{% url "ticketing:login" %}" class="w3-bar-item w3-button" style="text-align: right;">صفحه اصلی</a>
         <a href="#" class="w3-bar-item w3-button" style="text-align: right;">About</a>
 
     </div>
-    <div style="margin-right: 24.8%;margin-top:5.2%">
+    <div style="margin:5% 24.8% 1px 1px">
 
         <div class="card mb-1 bg-dark text-white">
-            <img class="card-img" style="height: 200px" src="{% static 'main_picture/main.png' %}" alt="Card image">
+            <img class="card-img" style="height: 250px" src="{% static 'main_picture/main.png' %}" alt="Card image">
             <div class="card-img-overlay text-right">
                 <h3 class="card-title">سیستم فروش بلیط سینما</h3>
                 <br>
@@ -68,62 +71,12 @@
         </div>
 
 
-        <div class="jumbotron" style="background-color: darkslategrey" dir="rtl">
-
-
-            {% if movie %}
-                <ul class="list-group">
-                    <li class="list-group-item bg-light text-dark text-center">
-                        <div class="row">
-                            <div class="col py-4 text-dark bg-light text-center">
-                                <b>
-                                    نام فیلم
-                                </b>
-                            </div>
-                            <div class="col py-4 text-center">
-                                <b>
-                                    کارگردان
-                                </b>
-                            </div>
-                            <div class="col py-4 text-center">
-                                <b>
-                                    سال ساخت
-                                </b>
-                            </div>
-                        </div>
-                    </li>
-                    {% for m in movie %}
-
-                        <a class="list-group-item text-info"
-                           href="{% url "ticketing:movie_details" movie_id=m.pk %}">
-                            <li class="list-group-item bg-secondary text-white">
-                                <div class="row">
-                                    <div class="col-sm-4 text-center">
-                                        {{ m.name }}
-                                    </div>
-                                    <div class="col-sm-4 text-center">
-                                        {{ m.director }}
-
-                                    </div>
-                                    <div class="col-sm-4 text-center">
-                                        {{ m.year }}
-
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-
-                    {% endfor %}
-                </ul>
-            {% else %}
-
-                <p class="text-light">فیلمی موجود نیست</p>
-            {% endif %}
-
+        <div class="mt-1" dir="rtl" style="background-color: #062c33;opacity: 90%">
+            {% block content %}
+            {% endblock %}
         </div>
 
-        <footer class="modal-footer text-center bg-light text-dark"
-        >
+        <footer class="modal-footer text-center bg-light text-dark">
             <p></p> <b> نام و نام خانوادگی : رضا فرجی</b></p>
             <p></p> <b>استاد راهنما : آقای مهندس نوید حاتمی</b></p>
             <p></p><b>پروژه پایانی کارشناسی</b></p>
@@ -131,6 +84,7 @@
         </footer>
     </div>
 </div>
+
 <script src="{% static "ticketing/js/My-js.js" %}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
