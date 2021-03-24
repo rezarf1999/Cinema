@@ -15,6 +15,9 @@ class Movie(models.Model):
     year = models.IntegerField('سال ساخت')
     description = models.TextField('توضیحات')
 
+    def __str__(self):
+        return self.name
+
 
 class Cinema(models.Model):
     # Cinema model
@@ -29,6 +32,9 @@ class Cinema(models.Model):
     phone = models.CharField('شماره تماس', max_length=20, null=True)
     image = models.ImageField('عکس', upload_to='Cinema_Images/', null=True, blank=True)
     address = models.TextField('آدرس')
+
+    def __str__(self):
+        return self.name
 
 
 class ShowTime(models.Model):
@@ -61,3 +67,6 @@ class ShowTime(models.Model):
         (sale_closed, 'فروش بلیت بسته شد'),
     )
     status = models.IntegerField('وضعیت', choices=status_choices, default=sale_not_started)
+
+    def __str__(self):
+        return '{}-{}-{}'.format(self.movie.name, self.cinema.name, self.start_time)

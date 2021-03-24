@@ -1,25 +1,30 @@
 {% extends "ticketing/base_page.html" %}
-
+{% load static %}
 {% block title %}
     سینماها
 {% endblock %}
 
+{% block main_image %}
 
+    <img class="card-img" style="height: 220px" src="{% static  'main_picture/Cinema.jpg' %}" alt="CINEMA TICKET ONLINE (CTO)">
+{% endblock %}
 
 {% block content_title %}
-    صفحه سینماها
+    فهرست سینماها
 {% endblock %}
 
 {% block buttons %}
-    <li class="nav-item"><a class="nav-link" href="{% url "ticketing:movie_list" %}">فیلمها</a></li>
-    <li class="nav-item"><a class="nav-link" href="{% url "ticketing:showtime_list" %}">سانس ها</a></li>
+        <a class="btn btn-outline-light" href="{% url "ticketing:showtime_list" %}">
+        <i class="fas fa-clock "></i>
+        سانس ها
+    </a>
+
+    <a class="btn btn-outline-light" href="{% url "ticketing:movie_list" %}">
+        <i class="fas fa-film "></i>
+        فیلم ها
+    </a>
+
 {% endblock %}
-
-
-
-{{ c.city }}
-
-{{ c.capacity }}
 
 
 {% block content %}
@@ -28,10 +33,10 @@
             {% if cinema %}
                 <div class="row">
                     {% for c in cinema %}
-                        <div class="col-md-6">
-                            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-                                <div class="card-body d-flex flex-column align-items-start">
-                                    <strong class="d-inline-block mb-2 text-primary">{{ c.name }}</strong>
+                        <div class="col-md-6 text-right">
+                            <div class="card border-dark text-dark flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="card-body d-flex flex-column align-items-end">
+                                    <strong class="d-inline-block mb-2 text-info">{{ c.name }}</strong>
 
                                     <p class="card-text mb-auto">
                                         شهر :
@@ -46,12 +51,12 @@
                                         {{ c.phone }}
                                     </p>
 
-                                    <a class="btn btn-outline-primary btn-sm" role="button"
+                                    <strong><a class="btn btn-outline-dark btn-light btn-sm"
                                        href="{% url "ticketing:cinema_details" cinema_id=c.pk %}">مشخصات
-                                        بیشتر</a>
+                                        بیشتر</a></strong>
                                 </div>
                                 <img class="card-img-right flex-auto d-none d-lg-block"
-                                     alt="Thumbnail [200x250]"
+                                     alt="{{ c.name }}"
                                      src="{{ c.image.url }}" style="width: 200px; height: 250px;">
                             </div>
                         </div>

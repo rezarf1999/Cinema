@@ -20,6 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ticketing/', include('ticketing.urls')),
+    path('users/', include('users.urls')),
 ]
 
 if settings.DEBUG:

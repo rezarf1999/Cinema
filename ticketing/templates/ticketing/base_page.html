@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 
-    <title>فیلم ها</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -13,33 +13,36 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
-</head>
-<body id="myPage" data-spy="scroll" data-offset="60">
-<div style="width: 100%; background-color: #dae0e5;font-family: 'Iranian Sans'">
 
-    <nav class="navbar fixed-top navbar-expand-lg bg-dark navbar-dark ml-auto w-100"
-         style="font-family: 'Iranian Sans';">
+</head>
+<body style="font-size: small" id="myPage" data-spy="scroll" data-offset="60">
+<div style="width: 100%; background-color: #dae0e5;font-family: sans-serif ">
+
+    <nav class="navbar fixed-top navbar-expand-lg bg-dark navbar-dark ml-auto w-100 font-weight-bolder">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Cinema Ticket Online(CTO)</a>
 
+        <a class="navbar-brand" style="font-size: medium">Cinema Ticket Online(CTO)</a>
+        <a class="btn btn-outline-light" href="#">
+            <i class="fas fa-sign-in-alt fa-flip-horizontal"></i>
+            ورود
+        </a>
         <div style="font-size: medium" class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <form class="form-inline my-2 my-lg-0 text-right ml-auto" style="margin-right: 35%">
-
-                    <button class="btn btn-outline-dark my-2 my-sm-0 bg-light" type="submit"><i
-                            class="fas fa-search fa-flip-horizontal"></i></button>
-                    <input class="form-control " dir="rtl" type="search" placeholder="جستجو.." aria-label="Search">
+            <form class="form-inline my-2 my-lg-0 text-right ml-auto text-center" style="margin-right: 2%">
+                <button class="btn btn-outline-dark my-2 my-sm-0 bg-light" type="submit"><i
+                        class="fas fa-search fa-flip-horizontal"></i></button>
+                <input class="form-control" dir="rtl" type="search" placeholder="جستجو.." aria-label="Search">
 
             </form>
-            <ul class="navbar-nav mt-2 mt-lg-0 mr-2 justify-content">
 
-                {% block buttons %}{% endblock %}
+            <div class="btn-group navbar-nav mt-2 mt-lg-0 mr-2 justify-content">
+                {% block buttons %}
 
-            </ul>
+                {% endblock %}
+
+            </div>
 
         </div>
 
@@ -47,40 +50,73 @@
 
 
     <!-- Sidebar -->
-    <div class="w3-sidebar w3-bar-block w3-card text-light"
-         style="text-align: right; width:24.7%;right:0;background-color: #203647">
-        <h3 class="w3-bar-item" style="text-align: right">منو</h3>
-
-        <a href="{% url "ticketing:cin" %}" class="w3-bar-item w3-button" style="text-align: right;">نظرات</a>
-        <a href="{% url "ticketing:login" %}" class="w3-bar-item w3-button" style="text-align: right;">صفحه اصلی</a>
-        <a href="#" class="w3-bar-item w3-button" style="text-align: right;">About</a>
+    <div class="position-fixed text-light"
+         style="text-align: right;height: 100%; width:24.7%;right:0;background-color: #203647">
+        <h3 class="nav-item p-2 pr-3 pb-4 border-bottom" style="text-align: right">منو</h3>
+        <a href="{% url "ticketing:cin" %}" class="nav-item btn-block btn-outline-light p-2 pr-3"
+           style="text-align: right;">نظرات</a>
+        <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
+           style="text-align: right;">صفحه اصلی</a>
+        <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3" style="text-align: right;">About</a>
 
     </div>
-    <div style="margin:5% 24.8% 1px 1px">
+    <div style="margin:5.5% 24.8% 1px 1px">
 
         <div class="card mb-1 bg-dark text-white">
-            <img class="card-img" style="height: 250px" src="{% static 'main_picture/main.png' %}" alt="Card image">
-            <div class="card-img-overlay text-right">
-                <h3 class="card-title">سیستم فروش بلیط سینما</h3>
-                <br>
-                <h5 class="card-text" dir="rtl"> خرید آسان بلیت سینما با
-                    <i><b>CTO</b></i>
-                </h5>
+            {% block main_image %}
+
+            {% endblock %}
+            <div class="card-img-overlay">
+                <div class="row" dir="rtl">
+                    <div class="col-6">
+                        <h1 class="card-title text-right text-light">سیستم فروش بلیت سینما</h1>
+                    </div>
+                </div>
+
 
             </div>
         </div>
 
-
-        <div class="mt-1" dir="rtl" style="background-color: #062c33;opacity: 90%">
+        {#        <div class="card text-light text-right p-2" style="background-color: #0c5460">#}
+        {#            <div class="row">#}
+        {##}
+        {#                <div class="col-6  pt-3">#}
+        {#                    <h5 class="card-text text-left text-light" dir="rtl"> خرید آسان بلیت سینما با#}
+        {#                        <i><b>CTO</b></i>#}
+        {#                    </h5>#}
+        {#                </div>#}
+        {#                <div class="col-6">#}
+        {#                    <h4>#}
+        {#                        {% block content_title %}#}
+        {#                        {% endblock %}#}
+        {#                    </h4>#}
+        {#                </div>#}
+        {#            </div>#}
+        {##}
+        {##}
+        {#        </div>#}
+        <div class="mt-1" style="background-color: #062c33;opacity: 90%">
+            <div class="row p-2 mr-1 ml-1 border-bottom">
+                <div class="col-6">
+                    <h5 class="card-text text-left text-light" dir="rtl"> خرید آسان بلیت سینما با
+                        <i><b>CTO</b></i>
+                    </h5>
+                </div>
+                <div class="col-6">
+                    <h5 class="card-text text-right text-light" dir="rtl">
+                        {% block content_title %}
+                        {% endblock %}
+                    </h5>
+                </div>
+            </div>
             {% block content %}
             {% endblock %}
         </div>
 
         <footer class="modal-footer text-center bg-light text-dark">
-            <p></p> <b> نام و نام خانوادگی : رضا فرجی</b></p>
-            <p></p> <b>استاد راهنما : آقای مهندس نوید حاتمی</b></p>
-            <p></p><b>پروژه پایانی کارشناسی</b></p>
-            <p></p><b>پاییز و زمستان 1399</b></p>
+            <p>نام و نام خانوادگی : رضا فرجی</p>
+            <p>استاد راهنما : آقای مهندس نوید حاتمی</p>
+            <p>پروژه پایانی کارشناسی</p>
         </footer>
     </div>
 </div>
