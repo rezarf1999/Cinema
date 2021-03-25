@@ -30,21 +30,24 @@
     <div class="row p-2" dir="rtl">
         <div class="col">
             {% if movie %}
+
                 <div class="row">
                     {% for m in movie %}
-                        {{ user_is }}
-                        <div class="col-md-4">
+                        <div class="col-md-4 ">
                             <div class="card mb-4 border-dark" style="text-align: right">
-                                <img class="card-img-top" src="{{ m.cover.url }}" alt="Card image cap">
+                                <img class="card-img-top" style="height: 250px" src="{{ m.cover.url }}" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title pb-1 border-bottom">{{ m.name }}</h5>
                                     <p class="card-text">
                                         کـارگـردان :
                                         {{ m.director }}
+
                                     </p>
                                     <p class="card-text">
                                         سال ساخت :
                                         {{ m.year }}
+
+
                                     </p>
                                     <a href="{% url "ticketing:movie_details" movie_id=m.pk %}"
                                        class="btn btn-dark btn-sm float-left">
@@ -55,11 +58,10 @@
                         </div>
                     {% endfor %}
                 </div>
+
             {% else %}
                 <p class="text-light">فیلمی موجود نیست</p>
             {% endif %}
-
         </div>
     </div>
-    {{ user }}
 {% endblock %}

@@ -13,111 +13,123 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
 </head>
 <body style="font-size: small" id="myPage" data-spy="scroll" data-offset="60">
-<div style="width: 100%; background-color: #dae0e5;font-family: sans-serif ">
 
-    <nav class="navbar fixed-top navbar-expand-lg bg-dark navbar-dark ml-auto w-100 font-weight-bolder">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <a class="navbar-brand" style="font-size: medium">Cinema Ticket Online(CTO)</a>
-        <a class="btn btn-outline-light" href="#">
-            <i class="fas fa-sign-in-alt fa-flip-horizontal"></i>
-            ورود
-        </a>
-        <div style="font-size: medium" class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <form class="form-inline my-2 my-lg-0 text-right ml-auto text-center" style="margin-right: 2%">
-                <button class="btn btn-outline-dark my-2 my-sm-0 bg-light" type="submit"><i
-                        class="fas fa-search fa-flip-horizontal"></i></button>
-                <input class="form-control" dir="rtl" type="search" placeholder="جستجو.." aria-label="Search">
+<div class="container-fluid ">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark ml-auto w-100 font-weight-bolder mb-1">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo03"
+                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" style="font-size: medium">Cinema Ticket Online(CTO)</a>
 
-            </form>
+            {% if  user.is_authenticated %}
 
-            <div class="btn-group navbar-nav mt-2 mt-lg-0 mr-2 justify-content">
-                {% block buttons %}
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item avatar dropdown" style="cursor: pointer;">
+                        <a class="nav-link dropdown-toggle " id="navbarDropdownMenuLink-saju"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                                 class="rounded-circle"
+                                 alt="avatar image" style="height: 50px;width: 50px">
+                            <i>{{ user.username }}</i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg-right dropdown text-center"
+                             aria-labelledby="navbarDropdownMenuLink-saju">
+                            <a class="dropdown-item" href="{% url 'accounts:profile' %}"><i
+                                    class="fas fa-user fa-flip-horizontal mr-1"></i>پروفایل</a>
+                            <a class="dropdown-item" href="{% url 'accounts:logout' %}"><i
+                                    class="fas fa-sign-out-alt fa-flip-horizontal mr-1"></i>
+                                خروج
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            {% else %}
+                <a class="btn btn-outline-light" href="{% url 'accounts:logout' %}">
+                    <i class="fas fa-sign-in-alt fa-flip-horizontal"></i>
+                    ورود
+                </a>
+            {% endif %}
+
+            <div style="font-size: medium" class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <form class="form-inline my-2 my-lg-0 text-right ml-auto text-center" style="margin-right: 2%">
+                    <button class="btn btn-outline-dark my-2 my-sm-0 bg-light" type="submit"><i
+                            class="fas fa-search fa-flip-horizontal"></i></button>
+                    <input class="form-control" dir="rtl" type="search" placeholder="جستجو.."
+                           aria-label="Search">
+
+                </form>
+
+                <div class="btn-group navbar-nav mt-2 mt-lg-0 mr-2 justify-content">
+                    {% block buttons %}
+                    {% endblock %}
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="col-9 h-100 pt-0 pr-1 pl-1">
+
+            <div class="card mb-1 bg-dark text-white">
+                {% block main_image %}
+                {% endblock %}
+                <div class="card-img-overlay">
+
+                    <h1 class="card-title text-right text-light">سیستم فروش بلیت سینما
+                    </h1>
+
+                </div>
+            </div>
+            <div class="mt-1" style="background-color: #062c33;opacity: 90%">
+                <div class="row border-bottom p-2" style="opacity: 80%">
+                    <div class="col-6">
+                        <h5 class="card-text text-left text-light" dir="rtl"> خرید آسان بلیت سینما با
+                            <i><b>CTO</b></i>
+                        </h5>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="card-text text-right text-light" dir="rtl">
+                            {% block content_title %}
+                            {% endblock %}
+                        </h5>
+                    </div>
+
+                </div>
+
+
+
+                {% block content %}
 
                 {% endblock %}
-
             </div>
+
+
+            <footer class="modal-footer text-center bg-light text-dark">
+                    <p>نام و نام خانوادگی : رضا فرجی</p>
+                    <p>استاد راهنما : آقای مهندس نوید حاتمی</p>
+                    <p>پروژه پایانی کارشناسی</p>
+            </footer>
 
         </div>
 
-    </nav>
-
-
-    <!-- Sidebar -->
-    <div class="position-fixed text-light"
-         style="text-align: right;height: 100%; width:24.7%;right:0;background-color: #203647">
-        <h3 class="nav-item p-2 pr-3 pb-4 border-bottom" style="text-align: right">منو</h3>
-        <a href="{% url "ticketing:cin" %}" class="nav-item btn-block btn-outline-light p-2 pr-3"
-           style="text-align: right;">نظرات</a>
-        <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
-           style="text-align: right;">صفحه اصلی</a>
-        <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3" style="text-align: right;">About</a>
-
-    </div>
-    <div style="margin:5.5% 24.8% 1px 1px">
-
-        <div class="card mb-1 bg-dark text-white">
-            {% block main_image %}
-
-            {% endblock %}
-            <div class="card-img-overlay">
-                <div class="row" dir="rtl">
-                    <div class="col-6">
-                        <h1 class="card-title text-right text-light">سیستم فروش بلیت سینما</h1>
-                    </div>
-                </div>
-
-
-            </div>
+        <div class="col-3 text-light" style="background-color: #203647">
+            <h3 class="nav-item p-2 pr-3 pb-4 border-bottom" style="text-align: right">منو</h3>
+            <a href="{% url 'ticketing:test' %}" class="nav-item btn-block btn-outline-light p-2 pr-3"
+               style="text-align: right;">نظرات</a>
+            <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
+               style="text-align: right;">صفحه اصلی</a>
+            <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
+               style="text-align: right;">About</a>
         </div>
-
-        {#        <div class="card text-light text-right p-2" style="background-color: #0c5460">#}
-        {#            <div class="row">#}
-        {##}
-        {#                <div class="col-6  pt-3">#}
-        {#                    <h5 class="card-text text-left text-light" dir="rtl"> خرید آسان بلیت سینما با#}
-        {#                        <i><b>CTO</b></i>#}
-        {#                    </h5>#}
-        {#                </div>#}
-        {#                <div class="col-6">#}
-        {#                    <h4>#}
-        {#                        {% block content_title %}#}
-        {#                        {% endblock %}#}
-        {#                    </h4>#}
-        {#                </div>#}
-        {#            </div>#}
-        {##}
-        {##}
-        {#        </div>#}
-        <div class="mt-1" style="background-color: #062c33;opacity: 90%">
-            <div class="row p-2 mr-1 ml-1 border-bottom">
-                <div class="col-6">
-                    <h5 class="card-text text-left text-light" dir="rtl"> خرید آسان بلیت سینما با
-                        <i><b>CTO</b></i>
-                    </h5>
-                </div>
-                <div class="col-6">
-                    <h5 class="card-text text-right text-light" dir="rtl">
-                        {% block content_title %}
-                        {% endblock %}
-                    </h5>
-                </div>
-            </div>
-            {% block content %}
-            {% endblock %}
-        </div>
-
-        <footer class="modal-footer text-center bg-light text-dark">
-            <p>نام و نام خانوادگی : رضا فرجی</p>
-            <p>استاد راهنما : آقای مهندس نوید حاتمی</p>
-            <p>پروژه پایانی کارشناسی</p>
-        </footer>
     </div>
 </div>
 
