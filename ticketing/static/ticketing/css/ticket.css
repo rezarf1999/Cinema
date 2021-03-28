@@ -1,0 +1,84 @@
+
+p{
+  font-weight: bold;
+  font-size: large;
+}
+body
+{
+  background-color: #dadde6;
+  font-family: my-Font;
+}
+
+
+.container-fluid
+{
+  width: 90%;
+  margin: 100px auto;
+  direction: rtl;
+}
+
+h1
+{
+  text-align: right;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-right: 10px solid #fec500;
+  padding-right: 10px;
+  margin-bottom: 30px
+}
+
+
+.card
+{
+  background-color: #fff;
+  color: #989898;
+  margin-bottom: 10px;
+  font-family:  my-Font;
+  border-radius: 4px;
+}
+
+.date
+{
+  font-size: x-large;
+  text-align: center;
+  border-left: 2px dashed #4e555b;
+}
+
+.date:before,
+.date:after
+{
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #DADDE6;
+  position: absolute;
+  top: -15px ;
+  left: -15px;
+  z-index: 1;
+  border-radius: 50%
+}
+
+.date:after
+{
+  top: auto;
+  bottom: -15px
+}
+
+.date time
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%)
+}
+
+
+.card-cont
+{
+  padding: 15px 10px 10px 10px;
+}
+
+

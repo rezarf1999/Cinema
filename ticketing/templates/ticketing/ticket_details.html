@@ -1,0 +1,85 @@
+{% extends "ticketing/base_ticket_login_profile.html" %}
+{% load static %}
+{% block title %}
+    جزئیات بلیت
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/ticket_details.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid text-light" style="">
+        <div class="card">
+
+            <div class="card-header text-dark">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="text-right">سیستم فروش بلیت CTO</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-left">CinemaTicketOnline(CTO)</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-9">
+                        <p><i class="fas fa-id-card"></i>
+                            کد بلیت :
+                            {{ ticket.id }}
+                        </p>
+                        <p><i class="fas fa-user"></i>
+                            خریدار :
+                            {{ ticket.customer.user.get_full_name }}
+                        </p>
+                        <p><i class="fas fa-film"></i>
+                            فیلم :
+                            {{ ticket.showtime.movie.name }}
+                        </p>
+                        <p><i class="fas fa-chair"></i>
+                            تعداد :
+                            {{ ticket.person_count }}
+                            نفر
+                        </p>
+                        <p><i class="fas fa-clock"></i>
+                            زمان شروع :
+                            {{ ticket.showtime.start_time|date:"l ساعت H:i" }}
+                        </p>
+                        <p><i class="fas fa-calendar"></i>
+                            تاریخ :
+                            {{ ticket.showtime.start_time|date:"SHORT_DATE_FORMAT" }}
+                        </p>
+                        <p><i class="fas fa-building"></i>
+                            سینما :
+                            {{ ticket.showtime.cinema.name }}
+                        </p>
+                        <p><i class="fas fa-phone"></i>
+                            شماره تماس :
+                            {{ ticket.showtime.cinema.phone }}
+                        </p>
+                        <p><i class="fas fa-map-marked"></i>
+                            آدرس :
+                            <i>{{ ticket.showtime.cinema.city }}</i> ، {{ ticket.showtime.cinema.address }}
+                        </p>
+                    </div>
+                    <div class="col-3 text-center p-3">
+                        <img class="img-thumbnail" style=""
+                             src="{% static 'main_picture/qr.png' %}" alt="عکس کاربر"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-footer text-center text-dark">
+                <p>
+                    جهت دریافت بلیت خود 20 دقیقه قبل از شروع سانس در سینما حضور یابید
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}
+

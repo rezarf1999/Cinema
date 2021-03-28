@@ -1,0 +1,40 @@
+body
+{
+  background-color: #dadde6;
+  font-family: my-Font;
+  font-size: medium;
+}
+.container-fluid{
+  direction: rtl;
+  text-align: right;
+}
+.card{
+  border-radius: 5px;
+  margin: 20px 20px 20px 20px;
+  padding: 2px;
+  border: 2px dashed #202326;
+
+}
+.card.card-header{
+  border-radius: 5px;
+  padding: 5px 20px 10px 20px;
+  background: ghostwhite;
+
+}
+.card-body{
+  padding: 5px 20px 10px 20px;
+  background: lightgray;
+  color: #1d2124;
+
+}
+.card.card-footer{
+  border-radius: 5px;
+  padding: 5px 20px 5px 20px;
+  background: lightgray;
+  color: white;
+  text-align: center;
+}
+.img-thumbnail{
+  height: 250px;
+  width: 200px
+}

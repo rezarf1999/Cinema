@@ -1,70 +1,55 @@
+{% extends "ticketing/base_ticket_login_profile.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>صفحه ورود</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'users/css/login.css' %}">
+{% block title %}صفحه ورود{% endblock %}
+{% block extra_css %}
+    <style>body{background-image: url({% static  'main_picture/forestbridge.jpg' %})</style>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/login.css' %}">{% endblock %}
+{% block content %}
+    <div class="container-fluid align-content-center" >
+        <div class="d-flex justify-content-center h-100">
+            <div class="card mt-5" style="width: 500px;height: 400px">
+                <div class="card-header">
+                    <h2 class="text-right text-white"> ورود</h2>
+                </div>
+                <div class="card-body" dir="rtl">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="User" name="username">
+                        </div>
 
-</head>
-<body dir="rtl" style="background-color: #203647">
-<div class="container align-content-center"></div>
-<div class="d-flex justify-content-center h-100" style="opacity: 98%">
-    <div class="card mt-5" style="width: 500px;height: 400px">
-        <div class="card-header" style="background-color: #062c33;opacity: 80%">
-            <h2 class="text-right text-white"> ورود</h2>
-        </div>
-        <div class="card-body bg-dark">
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <div class="input-group form-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Pass" name="password">
+                        </div>
+                        <div class="row text-right remember text-light font-weight-bold">
+                            <input class="mt-1" type="checkbox">
+                            ورود من را به یاد داشته باش
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-light justify-content-center login-btn">
+                                ورود
+                            </button>
+                        </div>
+                        {% if error %}
+                            <div class="form-group mt-3 text-light text-center">
+                                <i class="fas fa-exclamation"></i> {{ error }}
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="card-footer ">
+                    <div class="d-flex justify-content-center links text-light">
+                        <a class="text-light font-weight-bold" href="#">ساخت حساب</a>
+                        عضو نیستید؟
                     </div>
-                    <input type="text" class="form-control" placeholder="User" name="username">
-
                 </div>
-
-                <div class="input-group form-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="Pass" name="password">
-                </div>
-                <div class="row text-right remember text-light">
-                    <input class="mt-1" type="checkbox">
-                    ورود من را به یاد داشته باش
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-outline-light justify-content-center login-btn">
-                        ورود
-                    </button>
-                </div>
-                {% if error %}
-                    <div class="form-group alert alert-primary text-center">
-                        {{ error }}
-                    </div>
-                {% endif %}
-            </form>
-        </div>
-        <div class="card-footer ">
-            <div class="d-flex justify-content-center links">
-                عضو نیستید؟<a href="#">ساخت حساب</a>
             </div>
         </div>
-        </form>
     </div>
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}

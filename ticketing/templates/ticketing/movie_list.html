@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main_image %}
-    <img class="card-img" style="opacity: 70%;height: 220px" src="{% static 'main_picture/Film.jpg' %}"
+    <img class="card-img" style="height: 220px" src="{% static 'main_picture/main.png' %}"
          alt="CINEMA TICKET ONLINE (CTO)">
 {% endblock %}
 
@@ -30,7 +30,6 @@
     <div class="row p-2" dir="rtl">
         <div class="col">
             {% if movie %}
-
                 <div class="row">
                     {% for m in movie %}
                         <div class="col-md-4 ">

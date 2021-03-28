@@ -1,7 +1,9 @@
+import profile
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
-from ticketing.models import Movie, Cinema, ShowTime
+from ticketing.models import Movie, Cinema, ShowTime, Ticket
 
 
 def movie_list(request):
@@ -26,6 +28,7 @@ def showtime_list(request):
     context = {
         'showtime': showtime
     }
+
     return render(request, 'ticketing/showtime_list.html', context)
 
 
@@ -43,6 +46,25 @@ def cinema_details(request, cinema_id):
         'cinema': cinema
     }
     return render(request, 'ticketing/cinema_details.html', context)
+
+
+@login_required
+def ticket_list(request):
+    ticket = Ticket.objects.filter(customer=request.user.profile).order_by('-buy_time')
+    context = {
+        'ticket': ticket
+    }
+
+    return render(request, 'ticketing/ticket_list.html', context)
+
+
+@login_required
+def ticket_details(request, ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+    context = {
+        'ticket': ticket
+    }
+    return render(request, 'ticketing/ticket_details.html', context)
 
 
 def test(request):

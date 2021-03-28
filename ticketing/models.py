@@ -70,3 +70,17 @@ class ShowTime(models.Model):
 
     def __str__(self):
         return '{}-{}-{}'.format(self.movie.name, self.cinema.name, self.start_time)
+
+
+class Ticket(models.Model):
+    class Meta:
+        verbose_name = 'بلیت'
+        verbose_name_plural = 'بلیت'
+
+    customer = models.ForeignKey('accounts.Profile', on_delete=models.PROTECT, verbose_name='کاربر')
+    showtime = models.ForeignKey('ShowTime', on_delete=models.PROTECT, verbose_name='سانس')
+    buy_time = models.DateTimeField('زمان خرید بلیت', auto_now_add=True)
+    person_count = models.IntegerField('تعداد نفرات')
+
+    def __str__(self):
+        return '{}-{}-{}-{}'.format(self.showtime.movie, self.showtime, self.person_count, self.customer)

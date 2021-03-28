@@ -4,21 +4,21 @@
 <head>
 
     <title>{% block title %}{% endblock %}</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {#links#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
+
 </head>
-<body style="font-size: small" id="myPage" data-spy="scroll" data-offset="60">
+<body data-spy="scroll" data-offset="60">
 
 
-<div class="container-fluid ">
+<div class="container-fluid" >
     <div class="row">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark ml-auto w-100 font-weight-bolder mb-1">
             <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -32,27 +32,39 @@
 
                 <ul class="navbar-nav ml-auto nav-flex-icons">
                     <li class="nav-item avatar dropdown" style="cursor: pointer;">
-                        <a class="nav-link dropdown-toggle " id="navbarDropdownMenuLink-saju"
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
                            data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                            <img src="{{ user.profile.avatar.url }}"
                                  class="rounded-circle"
-                                 alt="avatar image" style="height: 50px;width: 50px">
+                                 alt="avatar" style="height: 50px;width: 50px">
                             <i>{{ user.username }}</i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg-right dropdown text-center"
-                             aria-labelledby="navbarDropdownMenuLink-saju">
-                            <a class="dropdown-item" href="{% url 'accounts:profile' %}"><i
-                                    class="fas fa-user fa-flip-horizontal mr-1"></i>پروفایل</a>
-                            <a class="dropdown-item" href="{% url 'accounts:logout' %}"><i
-                                    class="fas fa-sign-out-alt fa-flip-horizontal mr-1"></i>
+                        <div class="dropdown-menu dropdown-menu-lg-right dropdown text-right"
+                             aria-labelledby="navbarDropdownMenuLink">
+                            <label class="dropdown-item disabled">
+                                اعتبار :
+                                {{ user.profile.credit_money }}
+                                <i class="fas fa-coins"></i>
+                            </label>
+                            <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                                افزایش اعتبار
+                                <i class="fas fa-plus fa-flip-horizontal mr-1"></i>
+                            </a>
+                            <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+
+                                پروفایل
+                                <i class="fas fa-user fa-flip-horizontal mr-1"></i>
+                            </a>
+                            <a class="dropdown-item" href="{% url 'accounts:logout' %}">
                                 خروج
+                                <i class="fas fa-sign-out-alt fa-flip-horizontal mr-1"></i>
                             </a>
                         </div>
                     </li>
                 </ul>
             {% else %}
-                <a class="btn btn-outline-light" href="{% url 'accounts:logout' %}">
+                <a class="btn btn-outline-light" href="{% url 'accounts:login' %}">
                     <i class="fas fa-sign-in-alt fa-flip-horizontal"></i>
                     ورود
                 </a>
@@ -83,9 +95,25 @@
                 {% block main_image %}
                 {% endblock %}
                 <div class="card-img-overlay">
+                    <div class="row">
 
-                    <h1 class="card-title text-right text-light">سیستم فروش بلیت سینما
-                    </h1>
+                        <div class="col-6">
+                            {% if user.is_authenticated %}
+
+                            {% else %}
+                                <p class="text-light text-right float-left mt-1">جهت دسترسی به تمام بخش ها وارد شوید یا
+                                    ثبت
+                                    نام
+                                    کنید</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-6">
+                            <h2 class="text-light text-right">سیستم فروش بلیت سینما
+                            </h2>
+
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
@@ -114,9 +142,9 @@
 
 
             <footer class="modal-footer text-center bg-light text-dark">
-                    <p>نام و نام خانوادگی : رضا فرجی</p>
-                    <p>استاد راهنما : آقای مهندس نوید حاتمی</p>
-                    <p>پروژه پایانی کارشناسی</p>
+                <p>نام و نام خانوادگی : رضا فرجی</p>
+                <p>استاد راهنما : آقای مهندس نوید حاتمی</p>
+                <p>پروژه پایانی کارشناسی</p>
             </footer>
 
         </div>

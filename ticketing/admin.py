@@ -28,3 +28,5 @@ class ShowTimeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ShowTime, ShowTimeAdmin)
+
+admin.site.register(Ticket)
