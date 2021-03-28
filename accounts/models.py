@@ -18,6 +18,13 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.get_full_name()
 
+    def buy(self, total_price):
+        if self.credit_money < total_price:
+            return False
+        else:
+            self.credit_money -= total_price
+            self.save()
+            return True
 #
 # class Payment(models.Model):
 #

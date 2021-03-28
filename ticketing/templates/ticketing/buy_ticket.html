@@ -1,0 +1,94 @@
+{% extends "ticketing/base_ticket_login_profile.html" %}
+{% load static %}
+{% block title %}
+    جزئیات بلیت
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/ticket_details.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid text-light" style="">
+        <div class="card">
+
+            <div class="card-header text-dark">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="text-right">سیستم فروش بلیت CTO</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-left">CinemaTicketOnline(CTO)</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-9">
+                        <p><i class="fas fa-film"></i>
+                            فیلم :
+                            {{ showtime.movie.name }}
+
+                        </p>
+                        <p><i class="fas fa-building"></i>
+                            سینما :
+                            {{ showtime.cinema.name }}
+                        </p>
+                        <p><i class="fas fa-clock"></i>
+                            زمان شروع :
+                            {{ showtime.start_time|date:"l ساعت H:i" }}
+                        </p>
+                        <p><i class="fas fa-calendar"></i>
+                            تاریخ :
+                            {{ showtime.start_time|date:"SHORT_DATE_FORMAT" }}
+                        </p>
+                        <p><i class="fas fa-money-bill"></i>
+                            قیمت هر بلیت :
+                            {{ showtime.price }}
+                            تومان
+                        </p>
+                        <form action="" method="post" class="form-inline">
+                            {% csrf_token %}
+                            <div><i class="fas fa-chair"></i>
+                                تعداد :
+                                <select class="form-control-sm" name="seat_count">
+
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+
+                                </select>
+                                <b class="mr-3">
+                                    {{ showtime.salable_seats }}
+                                </b>
+                                صندلی باقیمانده
+                                <br>
+                                <button class="btn btn-outline-dark mt-3" href="#">خرید</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="col-3 text-center p-3">
+                        <img class="img-thumbnail" style=""
+                             src="{{ showtime.movie.cover.url }}" alt="عکس فیلم"/>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card-footer text-dark text-right">
+                <p>
+                    <i class="fas fa-map-marked"></i>
+                    آدرس سینما :
+                    {{ showtime.cinema.city }} ، {{ showtime.cinema.address }}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -18,11 +18,40 @@
     </button>
     <a class="navbar-brand" style="font-size: medium">Cinema Ticket Online(CTO)</a>
 
-    <a class="btn btn-outline-light text-center" href="{% url 'accounts:logout' %}">
-        <i class="fas fa-sign-out-alt fa-flip-horizontal mr-1"></i>
-        خروج
 
-    </a>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item avatar dropdown" style="cursor: pointer;">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+               data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <img src="{{ user.profile.avatar.url }}"
+                     class="rounded-circle"
+                     alt="avatar" style="height: 50px;width: 50px">
+                <i>{{ user.username }}</i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown text-right"
+                 aria-labelledby="navbarDropdownMenuLink">
+                <label class="dropdown-item disabled">
+                    اعتبار :
+                    {{ user.profile.credit_money }}
+                    <i class="fas fa-coins"></i>
+                </label>
+                <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                    افزایش اعتبار
+                    <i class="fas fa-plus fa-flip-horizontal mr-1"></i>
+                </a>
+                <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+
+                    پروفایل
+                    <i class="fas fa-user fa-flip-horizontal mr-1"></i>
+                </a>
+                <a class="dropdown-item" href="{% url 'accounts:logout' %}">
+                    خروج
+                    <i class="fas fa-sign-out-alt fa-flip-horizontal mr-1"></i>
+                </a>
+            </div>
+        </li>
+    </ul>
 
     <div style="font-size: medium" class="collapse navbar-collapse" id="navbarTogglerDemo03">
 

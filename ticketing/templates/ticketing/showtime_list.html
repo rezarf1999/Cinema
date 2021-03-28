@@ -29,7 +29,7 @@
 
 
 {% block content %}
-    <div class="row p-2 text-dark"dir="rtl">
+    <div class="row p-2 text-dark" dir="rtl">
         <div class="col">
             {% if showtime %}
                 <div class="row">
@@ -37,8 +37,8 @@
                         <div class="col-md-4 mb-2" dir="rtl">
                             <div class="card bg-light" style="text-align: right">
                                 <div class="card-body">
-                                <h6> تاریخ :{{ s.start_time|date:"SHORT_DATE_FORMAT" }}</h6>
-                                <br>
+                                    <h6> تاریخ :{{ s.start_time|date:"SHORT_DATE_FORMAT" }}</h6>
+                                    <br>
                                     <h5 class="card-title border-bottom pb-3">{{ s.start_time|date:"l  ساعت H:i" }}</h5>
                                     <p class="card-text">
                                         فیلم :
@@ -57,16 +57,15 @@
                                         ظرفیت باقیمانده :
                                         {{ s.salable_seats }}
                                     </p>
-                                    {#                                    <a href="{% url "ticketing:movie_details" movie_id=m.pk %}"#}
-                                    {#                                       class="btn btn-dark btn-sm">#}
-                                    {#                                        بیشتر...</a>#}
-                                    <a href="#" class="btn btn-sm  float-left btn
                                     {% if s.status == s.sale_start %}
-                                    btn-info
+
+                                    <a href="{% url 'ticketing:buy_ticket' showtime_id=s.id %}" class="btn btn-sm  float-left btn
+                                    btn-info ">خرید بلیت<i class=" fas fa-angle-double-left"></i></a>
                                     {% else %}
-                                    btn-secondary disabled
+                                        <a href="#" class="btn btn-sm  float-left btn
+                                        btn-secondary disabled "> مجاز نیست <i class="fas fa-exclamation"></i></a>
                                     {% endif %}
-                                    ">خرید بلیت<i class=" fas fa-angle-double-left"></i></a>
+
 
                                 </div>
                             </div>

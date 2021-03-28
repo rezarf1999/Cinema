@@ -1,0 +1,55 @@
+{% extends "ticketing/base_ticket_login_profile.html" %}
+{% load static %}
+{% block title %}صفحه ورود{% endblock %}
+{% block extra_css %}
+    <style>body{background-image: url({% static  'main_picture/forestbridge.jpg' %})</style>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/login.css' %}">{% endblock %}
+{% block content %}
+    <div class="container-fluid align-content-center" >
+        <div class="d-flex justify-content-center h-100">
+            <div class="card mt-5" style="width: 500px;height: 400px">
+                <div class="card-header">
+                    <h2 class="text-right text-white"> ورود</h2>
+                </div>
+                <div class="card-body" dir="rtl">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="User" name="username">
+                        </div>
+
+                        <div class="input-group form-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Pass" name="password">
+                        </div>
+                        <div class="row text-right remember text-light font-weight-bold">
+                            <input class="mt-1" type="checkbox">
+                            ورود من را به یاد داشته باش
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-light justify-content-center login-btn">
+                                ورود
+                            </button>
+                        </div>
+                        {% if error %}
+                            <div class="form-group mt-3 text-light text-center">
+                                <i class="fas fa-exclamation"></i> {{ error }}
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+                <div class="card-footer ">
+                    <div class="d-flex justify-content-center links text-light">
+                        <a class="text-light font-weight-bold" href="#">ساخت حساب</a>
+                        عضو نیستید؟
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
