@@ -24,16 +24,20 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
                data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-                <img src="{{ user.profile.avatar.url }}"
-                     class="rounded-circle"
-                     alt="avatar" style="height: 50px;width: 50px">
-                <i>{{ user.username }}</i>
+                {% if user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}"
+                         class="rounded-circle"
+                         alt="avatar" style="height: 50px;width: 50px">
+                    <i>{{ user.username }}</i>
+                {% endif %}
+
             </a>
             <div class="dropdown-menu dropdown-menu-lg-right dropdown text-right"
                  aria-labelledby="navbarDropdownMenuLink">
                 <label class="dropdown-item disabled">
                     اعتبار :
                     {{ user.profile.credit_money }}
+                    تومان
                     <i class="fas fa-coins"></i>
                 </label>
                 <a class="dropdown-item" href="{% url 'accounts:profile' %}">

@@ -10,7 +10,8 @@
 }
 
 .card-header, .card-footer {
-    opacity: 1
+    opacity: 1;
+    border-color: white;
 }
 
 

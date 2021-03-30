@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body dir="rtl">
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ add_user.as_p }}
+    {{ add_profile.as_p }}
+    <button type="submit">ثبت</button>
+</form>
+</body>
+</html>

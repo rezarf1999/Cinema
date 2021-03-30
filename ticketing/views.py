@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
+import ticketing
 from ticketing.models import Movie, Cinema, ShowTime, Ticket
 
 
@@ -69,18 +70,20 @@ def ticket_details(request, ticket_id):
 @login_required
 def buy_ticket(request, showtime_id):
     showtime = ShowTime.objects.get(pk=showtime_id)
+
     context = {
-        'showtime': showtime
+        'showtime': showtime,
+
     }
     if request.method == 'POST':
         try:
             seat_count = int(request.POST['seat_count'])
             assert showtime.status == showtime.sale_start, 'خرید بلیت برای این سانس امکانپذیر نمیباشد'
-            assert showtime.free_seats>= seat_count, 'صندلی خالی به میزان انتخاب شده وجود ندارد'
+            assert showtime.free_seats >= seat_count, 'صندلی خالی به میزان انتخاب شده وجود ندارد'
             total_price = showtime.price * seat_count
             assert request.user.profile.buy(total_price), 'اعتبار حساب برای خرید کافی نمیباشد'
             showtime.reserve_seats(seat_count)
-            ticket = Ticket.objects.create(showtime=showtime, customer=request.user.profile, set_count=set_count)
+            ticket = Ticket.objects.create(showtime=showtime, customer=request.user.profile, seat_count=seat_count)
         except Exception as e:
             context['error'] = str(e)
         else:
@@ -88,5 +91,5 @@ def buy_ticket(request, showtime_id):
     return render(request, 'ticketing/buy_ticket.html', context)
 
 
-def test(request):
-    return render(request, 'ticketing/test.html', {})
+def home(request):
+    return render(request, 'ticketing/home.html', {})

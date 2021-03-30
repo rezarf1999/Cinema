@@ -1,0 +1,93 @@
+{% extends "ticketing/base_ticket_login_profile.html" %}
+{% load static %}
+{% block title %}صفحه ورود{% endblock %}
+{% block extra_css %}
+    <style>
+        body {
+            background-image: url({% static  'main_picture/forestbridge.jpg' %})
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/edit_profile.css' %}">{% endblock %}
+{% block content %}
+    <div class="container-fluid align-content-center text-right">
+
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2 class="text-right text-white">ویرایش پروفایل</h2>
+            </div>
+            <div class="card-body" dir="rtl">
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>تاریخ تولد</label>
+                                    {{ user_profile.birthday }}
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>جنسیت</label>
+                                    {{ user_profile.gender }}
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>شهر</label>
+                                    {{ user_profile.city }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>آدرس</label>
+                                {{ user_profile.address }}
+                            </div>
+                            <button type="submit" class="btn btn-primary text-right">ذخیره</button>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {% if user.profile.avatar %}
+                                    <img class="img-thumbnail mt-2" src="{{ user.profile.avatar.url }}"
+                                         style="height: 300px;width: 220px" alt="عکس کاربر">
+                                {% endif %}
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-info mr-5 mt-2" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                    <i class="fas fa-image"></i>
+                                    انتخاب
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ profile_form.avatar }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    بستن
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer ">
+                <div class="d-flex justify-content-center links text-light">
+                    <p>CinemaTicketOnline(CTO)</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

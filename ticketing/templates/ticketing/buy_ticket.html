@@ -68,11 +68,14 @@
                                 </b>
                                 صندلی باقیمانده
                                 <br>
-                                <button class="btn btn-outline-dark mt-3" href="#">خرید</button>
+                                <button type="submit" class="btn btn-outline-dark mt-3"
+                                        href="#">خرید
+                                </button>
                             </div>
                         </form>
 
                     </div>
+
                     <div class="col-3 text-center p-3">
                         <img class="img-thumbnail" style=""
                              src="{{ showtime.movie.cover.url }}" alt="عکس فیلم"/>
@@ -82,11 +85,14 @@
 
             </div>
             <div class="card-footer text-dark text-right">
-                <p>
-                    <i class="fas fa-map-marked"></i>
-                    آدرس سینما :
-                    {{ showtime.cinema.city }} ، {{ showtime.cinema.address }}
-                </p>
+
+                {% if error %}
+                    <p>
+                        <i class="fas fa-exclamation"></i>
+                        {{ error }}
+                    </p>
+                {% endif %}
+
             </div>
         </div>
     </div>

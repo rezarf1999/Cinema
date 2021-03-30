@@ -72,7 +72,6 @@ class ShowTime(models.Model):
         return '{}-{}-{}'.format(self.movie.name, self.cinema.name, self.start_time)
 
     def reserve_seats(self, seat_count):
-
         assert isinstance(seat_count, int) and seat_count > 0, 'Number of seats should be a positive integer'
         assert self.status == ShowTime.sale_start, 'Sale is not open'
         assert self.free_seats >= seat_count, 'Not enough free seats'

@@ -18,7 +18,7 @@
 <body data-spy="scroll" data-offset="60">
 
 
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark ml-auto w-100 font-weight-bolder mb-1">
             <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -28,41 +28,45 @@
             </button>
             <a class="navbar-brand" style="font-size: medium">Cinema Ticket Online(CTO)</a>
 
-            {% if  user.is_authenticated %}
+            {% if  user.is_authenticated and user.proile.id %}
+                <div class="dropdown">
 
-                <ul class="navbar-nav ml-auto nav-flex-icons">
-                    <li class="nav-item avatar dropdown" style="cursor: pointer;">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
+                    {% if user.profile.avatar %}
+                        <a class="dropdown-toggle text-light" type="button" id="dropdownMenuButton"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="{{ user.profile.avatar.url }}"
                                  class="rounded-circle"
                                  alt="avatar" style="height: 50px;width: 50px">
                             <i>{{ user.username }}</i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg-right dropdown text-right"
-                             aria-labelledby="navbarDropdownMenuLink">
-                            <label class="dropdown-item disabled">
-                                اعتبار :
-                                {{ user.profile.credit_money }}
-                                <i class="fas fa-coins"></i>
-                            </label>
-                            <a class="dropdown-item" href="{% url 'accounts:profile' %}">
-                                افزایش اعتبار
-                                <i class="fas fa-plus fa-flip-horizontal mr-1"></i>
-                            </a>
-                            <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                    {% else %}
+                        <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+                        </button>
+                    {% endif %}
+                    <div class="dropdown-menu dropdown-menu-md-right text-right" aria-labelledby="dropdownMenuButton">
+                        <label class="dropdown-item disabled">
+                            اعتبار :
+                            {{ user.profile.credit_money }}
+                            تومان
+                            <i class="fas fa-coins"></i>
+                        </label>
 
-                                پروفایل
-                                <i class="fas fa-user fa-flip-horizontal mr-1"></i>
-                            </a>
-                            <a class="dropdown-item" href="{% url 'accounts:logout' %}">
-                                خروج
-                                <i class="fas fa-sign-out-alt fa-flip-horizontal mr-1"></i>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+                        <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                            افزایش اعتبار
+                            <i class="fas fa-plus fa-flip-horizontal mr-1"></i>
+                        </a>
+                        <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                            پروفایل
+                            <i class="fas fa-user fa-flip-horizontal mr-1"></i>
+                        </a>
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">
+                            خروج
+                            <i class="fas fa-sign-out-alt fa-flip-horizontal mr-1"></i>
+                        </a>
+                    </div>
+                </div>
             {% else %}
                 <a class="btn btn-outline-light" href="{% url 'accounts:login' %}">
                     <i class="fas fa-sign-in-alt fa-flip-horizontal"></i>
@@ -76,7 +80,6 @@
                             class="fas fa-search fa-flip-horizontal"></i></button>
                     <input class="form-control" dir="rtl" type="search" placeholder="جستجو.."
                            aria-label="Search">
-
                 </form>
 
                 <div class="btn-group navbar-nav mt-2 mt-lg-0 mr-2 justify-content">
@@ -90,7 +93,6 @@
         </nav>
 
         <div class="col-9 h-100 pt-0 pr-1 pl-1">
-
             <div class="card mb-1 bg-dark text-white">
                 {% block main_image %}
                 {% endblock %}
@@ -149,8 +151,10 @@
 
         <div class="col-3 text-light" style="background-color: #203647">
             <h3 class="nav-item p-2 pr-3 pb-4 border-bottom" style="text-align: right">منو</h3>
-            <a href="{% url 'ticketing:test' %}" class="nav-item btn-block btn-outline-light p-2 pr-3"
-               style="text-align: right;">نظرات</a>
+
+            <a href="{% url 'accounts:make_user' %}" class="nav-item btn-block btn-outline-light p-2 pr-3"
+               style="text-align: right;">ساخت حساب کاربری</a>
+
             <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
                style="text-align: right;">صفحه اصلی</a>
             <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
