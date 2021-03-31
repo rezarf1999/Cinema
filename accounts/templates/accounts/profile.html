@@ -1,244 +1,233 @@
-{% extends "ticketing/base_ticket_login_profile.html" %}
+{% extends "accounts/base_navbar.html" %}
 {% load static %}
-{% block title %}پروفایل{% endblock %}
+
+
+{% block title %}
+    پروفایل
+{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/profile.css' %}">{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/profile.css' %}">
+{% endblock %}
+
+
 {% block content %}
     <div class="container profile-design text-dark">
-        <form method="post">
-            {% for p in profile %}
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            {% if user.profile.avatar %}
-                                <img class="img-thumbnail" style="height: 250px;width: 200px" src="{{ p.avatar.url }}"
-                                     alt="عکس کاربر">
-                            {% else %}
-                                <p>در صورت انخاب عکس در این محل قرار میگیرد</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-md-8" dir="rtl">
-                        <div class="profile-head">
-
-                            <h5 class="mb-4 text-center">
-                                {{ user.username }}
-                            </h5>
-                            <div class="mb-5 font-weight-bolder">
-                                <a type="submit" class="btn btn-outline-info" href="{% url 'accounts:edit_profile' %}"
-                                   value="Edit Profile">
-                                    <i class="fas fa-edit"></i>
-                                    ویرایش اطلاعات
-                                </a>
-                                <a class="btn btn-outline-primary text-left" href="">
-                                    <i class="fas fa-key"></i>
-                                    تغییر پسوورد
-                                </a>
-                            </div>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item mr-0">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                       aria-controls="home" aria-selected="true">مشخصات کاربر</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                       aria-controls="profile" aria-selected="false">علاقه مندی ها</a>
-                                </li>
-                            </ul>
-
-                        </div>
+        {% for p in profile %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        {% if user.profile.avatar %}
+                            <img class="img-thumbnail" style="height: 250px;width: 200px" src="{{ p.avatar.url }}"
+                                 alt="عکس کاربر">
+                        {% else %}
+                            <p>در صورت انخاب عکس در این محل قرار میگیرد</p>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="row mb-2">
-                    <div class="col-md-10">
+                <div class="col-md-8" dir="rtl">
+                    <div class="profile-head">
 
-                    </div>
-                    <div class="col-md-2">
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4 ">
-                        <div class="profile-work">
-                            <a href="{% url 'accounts:profile' %}" class="mb-3 mt-3">
-                                افزایش اعتبار
-                                <i class="fas fa-plus"></i>
+                        <h5 class="mb-4 text-center">
+                            {{ user.username }}
+                        </h5>
+                        <div class="mb-5 font-weight-bolder">
+                            <a class="btn btn-outline-info" href="{% url 'accounts:edit_profile' %}"
+                               value="Edit Profile">
+                                <i class="fas fa-edit"></i>
+                                ویرایش اطلاعات
                             </a>
-                            <br/>
-                            <a href="{% url 'ticketing:showtime_list' %}" class="mb-3 mt-3">
-                                خرید بلیت
-                                <i class="fas fa-ticket-alt"></i>
-                            </a><br/>
-                            <a href="{% url 'ticketing:ticket_list' %}" class="mb-3">
+                            <a class="btn btn-outline-primary text-left" href="{% url 'accounts:change_pass' %}">
+                                <i class="fas fa-key"></i>
+                                تغییر پسوورد
+                            </a>
+                        </div>
 
-                                بلیت های خریداری شده
-                                <i class="fas fa-ticket-alt"></i>
-                            </a><br/>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item mr-0">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                   aria-controls="home" aria-selected="true">مشخصات کاربر</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                   aria-controls="profile" aria-selected="false">علاقه مندی ها</a>
+                            </li>
+                        </ul>
 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="profile-work">
+                        <a href="{% url 'accounts:new_payment' %}" class="mb-3 mt-3">
+                            افزایش اعتبار
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <br/>
+                        <a class="mb-3 mt-3" href="{% url 'accounts:payment_list' %}">
+                            لیست تراکنش ها
+                            <i class="fas fa-money-bill fa-flip-horizontal mr-1"></i>
+                        </a><br>
+                        <a href="{% url 'ticketing:showtime_list' %}" class="mb-3 mt-3">
+                            خرید بلیت
+                            <i class="fas fa-ticket-alt"></i>
+                        </a><br/>
+                        <a href="{% url 'ticketing:ticket_list' %}" class="mb-3">
+
+                            بلیت های خریداری شده
+                            <i class="fas fa-ticket-alt"></i>
+                        </a><br/>
+
+
+                    </div>
+                </div>
+                <div class="col-md-8 text-right" dir="rtl">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row border-bottom">
+                                <div class="col-md-6">
+                                    <i class="fas fa-user-circle"></i>
+                                    <label> نام کاربری :
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.username }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row border-bottom">
+                                <div class="col-md-6 ">
+                                    <i class="fas fa-user-alt"></i>
+                                    <label>نام : </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.first_name }}</p>
+                                </div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-md-6">
+                                    <i class="fas fa-user-alt"></i>
+                                    <label>
+                                        نام خانوادگی :
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.last_name }}</p>
+                                </div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-md-6">
+                                    <i class="fas fa-phone"></i>
+                                    <label>
+
+                                        شماره تلفن :
+
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ p.phone }}</p>
+                                </div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-md-6">
+                                    <i class="fas fa-mail-bulk"></i>
+                                    <label>
+
+                                        Email :</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.email }}</p>
+                                </div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-md-6">
+                                    <i class="fas fa-birthday-cake"></i>
+                                    <label>
+
+                                        تاریخ تولد :
+
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ p.birthday }}</p>
+                                </div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-md-6">
+                                    <i class="fas fa-coins"></i>
+                                    <label>
+
+                                        اعتبار مالی :</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        {{ p.credit_money }}
+                                        تومان
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-md-6">
+                                    <i class="fas fa-address-card"></i>
+                                    <label>
+
+                                        آدرس :</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ p.address }}</p>
+                                </div>
+                            </div>
 
                         </div>
-                    </div>
-                    <div class="col-md-8 text-right" dir="rtl">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <i class="fas fa-user-circle"></i>
-                                        <label> نام کاربری :
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ user.username }}</p>
-                                    </div>
-                                </div>
-
-                                <div class="row border-bottom">
-                                    <div class="col-md-6 ">
-                                        <i class="fas fa-user-alt"></i>
-                                        <label>نام : </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ user.first_name }}</p>
-                                    </div>
-                                </div>
-                                <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <i class="fas fa-user-alt"></i>
-                                        <label>
-                                            نام خانوادگی :
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ user.last_name }}</p>
-                                    </div>
-                                </div>
-                                <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <i class="fas fa-phone"></i>
-                                        <label>
-
-                                            شماره تلفن :
-
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ p.phone }}</p>
-                                    </div>
-                                </div>
-                                <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <i class="fas fa-mail-bulk"></i>
-                                        <label>
-
-                                            Email :</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ user.email }}</p>
-                                    </div>
-                                </div>
-                                <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <i class="fas fa-birthday-cake"></i>
-                                        <label>
-
-                                            تاریخ تولد :
-
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ p.birthday }}</p>
-                                    </div>
-                                </div>
-                                <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <i class="fas fa-coins"></i>
-                                        <label>
-
-                                            اعتبار مالی :</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>
-                                            {{ p.credit_money }}
-                                            تومان
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <i class="fas fa-address-card"></i>
-                                        <label>
-
-                                            آدرس :</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ p.address }}</p>
-                                    </div>
-                                </div>
-
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <p>این قسمت در صورت لزوم توسعه داده خواهد شد</p>
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Profession</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Web Developer and Designer</p>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>ژانر مورد علاقه</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Experience</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
+                                <div class="col-md-6">
+                                    <p> مثال :کمدی</p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Hourly Rate</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>10$/hr</p>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>بهترین کارگردان از نظر شما</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Total Projects</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>230</p>
-                                    </div>
+                                <div class="col-md-6">
+                                    <p> مثال :مهران مدیری</p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>English Level</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>بازیگران مورد علاقه</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Availability</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>6 months</p>
-                                    </div>
+                                <div class="col-md-6">
+                                    <p>مثال:مهران غفوریان</p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>سینما مورد علاقه</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>مثال: سینما آزادی</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>بهترین سانس از نظر شما</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>مثال سانس ساعت 19:00</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </form>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
-tml>

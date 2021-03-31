@@ -1,15 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body dir="rtl">
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ add_user.as_p }}
-    {{ add_profile.as_p }}
-    <button type="submit">ثبت</button>
-</form>
-</body>
-</html>
+{% extends "accounts/base_navbar.html" %}
+{% load static %}
+{% block title %}صفحه ورود{% endblock %}
+{% block extra_css %}
+    <style>
+        body {
+            background-image: url({% static  'main_picture/forestbridge.jpg' %})
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/edit_profile.css' %}">{% endblock %}
+{% block content %}
+    <div class="container-fluid align-content-center text-right">
+
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2 class="text-right text-white">ساخت حساب کاربری</h2>
+            </div>
+            <div class="card-body" dir="rtl">
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>نام کاربری</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>نام</label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>نام خانوادگی</label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>گذرواژه</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>تایید گذرواژه</label>
+                            {{ form.password2 }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>ایمیل</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>تلفن همراه</label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>جنسیت</label>
+                            {{ form.gender }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>تاریخ تولد</label>
+                            {{ form.birthday }}
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>شهر</label>
+                            {{ form.city }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>آدرس</label>
+                        {{ form.address }}
+                    </div>
+                    <button type="submit" class="btn btn-primary text-right">ذخیره</button>
+                </form>
+            </div>
+            <div class="card-footer ">
+                <div class="d-flex justify-content-center links text-light">
+                    <p>CinemaTicketOnline(CTO)</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -49,9 +49,7 @@ class ShowTime(models.Model):
 
     start_time = models.DateTimeField('زمان شروع سانس')
     price = models.IntegerField('قیمت')
-    salable_seats = models.IntegerField('تعداد صندلی های قابل فروش')
     free_seats = models.IntegerField('تعداد صندلی های خالی')
-
     sale_start = 1
     sale_not_started = 2
     tickets_finished = 3
@@ -66,16 +64,17 @@ class ShowTime(models.Model):
         (movie_finished, 'فیلم تمام شد'),
         (sale_closed, 'فروش بلیت بسته شد'),
     )
-    status = models.IntegerField('وضعیت', choices=status_choices, default=sale_not_started)
+
+    status = models.IntegerField('وضعیت', choices=status_choices, default=status_choices)
 
     def __str__(self):
         return '{}-{}-{}'.format(self.movie.name, self.cinema.name, self.start_time)
 
-    def reserve_seats(self, seat_count):
-        assert isinstance(seat_count, int) and seat_count > 0, 'Number of seats should be a positive integer'
+    def reserve_seats(self, person_count):
+        assert isinstance(person_count, int) and person_count > 0, 'Number of seats should be a positive integer'
         assert self.status == ShowTime.sale_start, 'Sale is not open'
-        assert self.free_seats >= seat_count, 'Not enough free seats'
-        self.free_seats -= seat_count
+        assert self.free_seats >= person_count, 'Not enough free seats'
+        self.free_seats -= person_count
         if self.free_seats == 0:
             self.status = ShowTime.tickets_finished
         self.save()

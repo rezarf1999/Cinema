@@ -1,4 +1,4 @@
-{% extends "ticketing/base_page.html" %}
+{% extends "ticketing/base_ticketing.html" %}
 {% load static %}
 {% block title %}
     فیلم ها
@@ -30,11 +30,24 @@
     <div class="row p-2" dir="rtl">
         <div class="col">
             {% if movie %}
+                <form method="get" action="">
+                    <div class=" border-bottom mb-4" dir="rtl">
+                        <div class="form-row text-light text-center mb-2">
+                            <div class="col-md-3">
+                                جستجو بین فیلمها
+                                {{ form.movie_name }}
+                            </div>
+                            <button type="submit" class="btn btn-outline-light mt-4"><i
+                            class="fas fa-search fa-flip-horizontal"></i></button>
+                        </div>
+                    </div>
+                </form>
                 <div class="row">
                     {% for m in movie %}
                         <div class="col-md-4 ">
                             <div class="card mb-4 border-dark" style="text-align: right">
-                                <img class="card-img-top" style="height: 250px" src="{{ m.cover.url }}" alt="Card image cap">
+                                <img class="card-img-top" style="height: 250px" src="{{ m.cover.url }}"
+                                     alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title pb-1 border-bottom">{{ m.name }}</h5>
                                     <p class="card-text">

@@ -1,0 +1,34 @@
+
+.container-fluid {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.card {
+    background-color: rgba(105, 105, 105, 0.5);
+}
+
+.card-header, .card-footer {
+    opacity: 1;
+    border-color: white;
+}
+
+
+.remember input {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+.login-btn {
+
+    width: 100px;
+
+}
+
+
+.login-btn:hover {
+
+}

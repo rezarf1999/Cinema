@@ -1,4 +1,4 @@
-{% extends "ticketing/base_page.html" %}
+{% extends "ticketing/base_ticketing.html" %}
 {% load static %}
 {% block title %}
     سینماها
@@ -6,7 +6,8 @@
 
 {% block main_image %}
 
-    <img class="card-img" style="height: 220px" src="{% static  'main_picture/Cinema.jpg' %}" alt="CINEMA TICKET ONLINE (CTO)">
+    <img class="card-img" style="height: 220px" src="{% static  'main_picture/Cinema.jpg' %}"
+         alt="CINEMA TICKET ONLINE (CTO)">
 {% endblock %}
 
 {% block content_title %}
@@ -14,7 +15,7 @@
 {% endblock %}
 
 {% block buttons %}
-        <a class="btn btn-outline-light" href="{% url "ticketing:showtime_list" %}">
+    <a class="btn btn-outline-light" href="{% url "ticketing:showtime_list" %}">
         <i class="fas fa-clock "></i>
         سانس ها
     </a>
@@ -31,6 +32,20 @@
     <div class="row p-2">
         <div class="col">
             {% if cinema %}
+                <form method="get" action="">
+                    <div class=" border-bottom mb-4"dir="rtl">
+                        <div class="form-row text-light text-center mb-2">
+                            <div class="col-3">
+                                جستجو بین سینماها
+                                {{ form.cinema_name }}
+                            </div>
+                            <button type="submit" class="mt-4 btn btn-outline-light"><i
+                            class="fas fa-search fa-flip-horizontal"></i></button>
+                        </div>
+
+                    </div>
+
+                </form>
                 <div class="row">
                     {% for c in cinema %}
                         <div class="col-md-6 text-right">
@@ -52,7 +67,7 @@
                                     </p>
 
                                     <strong><a class="btn btn-outline-dark btn-light btn-sm"
-                                       href="{% url "ticketing:cinema_details" cinema_id=c.pk %}">مشخصات
+                                               href="{% url "ticketing:cinema_details" cinema_id=c.pk %}">مشخصات
                                         بیشتر</a></strong>
                                 </div>
                                 <img class="card-img-right flex-auto d-none d-lg-block"

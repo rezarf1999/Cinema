@@ -1,4 +1,4 @@
-{% extends "ticketing/base_ticket_login_profile.html" %}
+{% extends "accounts/base_navbar.html" %}
 {% load static %}
 {% block title %}
     جزئیات بلیت
@@ -52,7 +52,7 @@
                             {% csrf_token %}
                             <div><i class="fas fa-chair"></i>
                                 تعداد :
-                                <select class="form-control-sm" name="seat_count">
+                                <select class="form-control-sm" name="person_count">
 
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -64,7 +64,7 @@
 
                                 </select>
                                 <b class="mr-3">
-                                    {{ showtime.salable_seats }}
+                                    {{ showtime.free_seats }}
                                 </b>
                                 صندلی باقیمانده
                                 <br>

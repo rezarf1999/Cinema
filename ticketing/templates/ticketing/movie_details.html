@@ -1,104 +1,88 @@
+{% extends "accounts/base_navbar.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+{% block title %}
+    مشخصات فیلم ها
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>مشخصات فیلم ها</title>
+{% block extra_css %}
 
-    {#links#}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/My-Styles.css" %}">
+{% endblock %}
 
-</head>
-<body lang="fa" dir="rtl">
-<div class="jumbotron" style="margin-top:30px">
-    <div class="text-dark" style="height: 60px">
-        <h1 class="h1 text-center">سیستم فروش بلیت سینما</h1>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            <hr>
+{% block content %}
+    <div class="jumbotron" style="margin-top:30px">
+        <div class="text-dark" style="height: 60px">
+            <h1 class="h1 text-center">سیستم فروش بلیت سینما</h1>
         </div>
-    </div>
-
-
-    <a href="{% url "ticketing:movie_list" %}" class="btn btn-info" role="button">
-        برگشت به صفحه فیلم ها
-    </a>
-
-    <br>
-    <br>
-    <div class="row text-dark" style="direction: rtl">
-        <div class="col-sm-8">
-            <h3>
-                {{ movie.name }}
-            </h3>
-            <br>
-
-            <div class="form-group">
-
-                <label for="director">
-                    <b>
-                        کارگردان :
-                    </b>
-                </label>
-                <output type="text">{{ movie.director }}</output>
-                <br>
-                <label for="year">
-                    <b>
-                        سال ساخت :
-                    </b>
-                </label>
-                <output type="text">{{ movie.year }}</output>
-                <br>
-                <label for="time">
-                    <b>
-                        مدت زمان فیلم :
-                    </b>
-                </label>
-                <output type="text">
-                    {{ movie.length }}
-                    دقیقه
-                </output>
-                <br>
-                <label for="description">
-                    <b>
-                        توضیحات فیلم:
-                    </b>
-                </label>
-                <textarea class="form-control font-weight-bold" rows="5" style="width: 70%; resize: none"
-                          disabled>{{ movie.description }}</textarea>
+        <br>
+        <div class="row">
+            <div class="col">
+                <hr>
             </div>
         </div>
-        <div class="col-sm-4">
-            <img src="{{ movie.cover.url }}" alt="کاور فیلم" class="img-thumbnail"
-                 style="box-sizing: border-box;width: 300px;height: 400px">
+
+
+        <br>
+        <br>
+        <div class="row text-dark" style="direction: rtl">
+            <div class="col-sm-8">
+                <h3>
+                    {{ movie.name }}
+                </h3>
+                <br>
+
+                <div class="form-group">
+
+                    <label for="director">
+                        <b>
+                            کارگردان :
+                        </b>
+                    </label>
+                    <output type="text">{{ movie.director }}</output>
+                    <br>
+                    <label for="year">
+                        <b>
+                            سال ساخت :
+                        </b>
+                    </label>
+                    <output type="text">{{ movie.year }}</output>
+                    <br>
+                    <label for="time">
+                        <b>
+                            مدت زمان فیلم :
+                        </b>
+                    </label>
+                    <output type="text">
+                        {{ movie.length }}
+                        دقیقه
+                    </output>
+                    <br>
+                    <label for="description">
+                        <b>
+                            توضیحات فیلم:
+                        </b>
+                    </label>
+                    <textarea class="form-control font-weight-bold" rows="5" style="width: 70%; resize: none"
+                              disabled>{{ movie.description }}</textarea>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <img src="{{ movie.cover.url }}" alt="کاور فیلم" class="img-thumbnail"
+                     style="box-sizing: border-box;width: 300px;height: 400px">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <hr>
+            </div>
+        </div>
+        <div class="row align-content-center">
+            <div class="col text-white text-center" style="background-color: #491217">
+
+                <p class="text-white">محل قرار دادن تبلیغات</p>
+
+            </div>
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            <hr>
-        </div>
-    </div>
-    <div class="row align-content-center">
-        <div class="col text-white text-center" style="background-color: #491217">
 
-            <p class="text-white">محل قرار دادن تبلیغات</p>
-
-        </div>
-    </div>
-</div>
-
-
-<script src="{% static "ticketing/js/My-js.js" %}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-
-</body>
-</html>
+{% endblock %}

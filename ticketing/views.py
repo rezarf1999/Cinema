@@ -3,30 +3,48 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
-import ticketing
+from ticketing.forms import ShowTimeSearchForm, MovieSearchForm, CinemaSearchForm
 from ticketing.models import Movie, Cinema, ShowTime, Ticket
 
 
 def movie_list(request):
-    movies = Movie.objects.all()
+    movie = Movie.objects.all()
+    form = MovieSearchForm(request.GET)
+    if form.is_valid():
+        movie = movie.filter(name__contains=form.cleaned_data['movie_name'])
     context = {
-        'movie': movies,
+        'movie': movie,
+        'form': form
     }
     return render(request, 'ticketing/movie_list.html', context)
 
 
 def cinema_list(request):
-    cinemas = Cinema.objects.all()
+    cinema = Cinema.objects.all()
+    form = CinemaSearchForm(request.GET)
+    if form.is_valid():
+        cinema = cinema.filter(name__contains=form.cleaned_data['cinema_name'])
+    cinema = cinema.order_by('name')
     context = {
-        'cinema': cinemas
+        'cinema': cinema,
+        'form': form
     }
     return render(request, 'ticketing/cinema_list.html', context)
 
 
 def showtime_list(request):
-    showtime = ShowTime.objects.all().order_by('start_time')
+    showtime = ShowTime.objects.all()
+    form = ShowTimeSearchForm(request.GET)
+    if form.is_valid():
+        showtime = showtime.filter(movie__name__contains=form.cleaned_data['movie_name'])
+        if form.cleaned_data['sale_open']:
+            showtime = showtime.filter(status=ShowTime.sale_start)
+        if form.cleaned_data['cinema_name'] is not None:
+            showtime = showtime.filter(cinema__name__contains=form.cleaned_data['cinema_name'])
+    showtime = showtime.order_by('start_time')
     context = {
-        'showtime': showtime
+        'showtime': showtime,
+        'form': form
     }
 
     return render(request, 'ticketing/showtime_list.html', context)
@@ -77,13 +95,13 @@ def buy_ticket(request, showtime_id):
     }
     if request.method == 'POST':
         try:
-            seat_count = int(request.POST['seat_count'])
+            person_count = int(request.POST['person_count'])
             assert showtime.status == showtime.sale_start, 'خرید بلیت برای این سانس امکانپذیر نمیباشد'
-            assert showtime.free_seats >= seat_count, 'صندلی خالی به میزان انتخاب شده وجود ندارد'
-            total_price = showtime.price * seat_count
+            assert showtime.free_seats >= person_count, 'صندلی خالی به میزان انتخاب شده وجود ندارد'
+            total_price = showtime.price * person_count
             assert request.user.profile.buy(total_price), 'اعتبار حساب برای خرید کافی نمیباشد'
-            showtime.reserve_seats(seat_count)
-            ticket = Ticket.objects.create(showtime=showtime, customer=request.user.profile, seat_count=seat_count)
+            showtime.reserve_seats(person_count)
+            ticket = Ticket.objects.create(customer=request.user.profile, showtime=showtime, person_count=person_count)
         except Exception as e:
             context['error'] = str(e)
         else:

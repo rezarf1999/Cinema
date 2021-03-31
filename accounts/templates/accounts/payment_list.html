@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "accounts/base_navbar.html" %}
+{% load static %}
+{% block title %}صفحه ورود{% endblock %}
+{% block extra_css %}
+    <style>body {
+        background-image: url({% static  'main_picture/forestbridge.jpg' %})
+    }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/payment_list.css' %}">{% endblock %}
+{% block content %}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="header-title pb-3 mt-0">تراکنش ها</h5>
+                    </div>
+                    <div class="card-body">
 
-</body>
-</html>
+                        {% if payments %}
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                    <tr class="align-self-center">
+                                        <th>کاربر</th>
+                                        <th>نام و نام خانوادگی</th>
+                                        <th>مقدار</th>
+                                        <th>زمان تراکنش</th>
+                                        <th>کد تراکنش</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for p in payments %}
+                                        <tr>
+                                            <td>
+                                                {% if user.profile.avatar.url %}
+                                                    <img src="{{ user.profile.avatar.url }}" alt=""
+                                                         class="thumb-sm rounded-circle mr-2">
+                                                {% endif %}
+                                                {{ user.username }}
+                                            </td>
+                                            <td> {{ user.get_full_name }}</td>
+                                            <td>{{ p.amount }}</td>
+                                            <td>{{ p.transaction_time }}</td>
+                                            <td>{{ p.transaction_code }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p>تراکنشی ثبت نشده است</p>
+                        {% endif %}
+                    </div>
+                <div class="card-footer"><p>CinemaTicketOnline(CTO)</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

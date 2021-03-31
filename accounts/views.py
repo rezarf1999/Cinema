@@ -1,12 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from accounts.forms import ProfileForm, UserForm, AddUserForm
-from accounts.models import Profile
+from accounts.forms import ProfileForm, UserForm, AddUserForm, PaymentForm
+from accounts.models import Profile, Payment
 
 
 def login_v(request):
@@ -21,14 +20,8 @@ def login_v(request):
             return render(request, 'accounts/login.html', context)
 
         else:
-            if request.user.profile.id:
-                login(request, user)
-                return HttpResponseRedirect(reverse('ticketing:showtime_list'))
-            else:
-                context={
-                    'error': 'برای استفاده از حسابتان باید یک پروفایل بسازید'
-                }
-                return HttpResponseRedirect(reverse('accounts:make_profile'))
+            login(request, user)
+            return HttpResponseRedirect(reverse('ticketing:showtime_list'))
 
     else:
         if request.user.is_authenticated:
@@ -52,33 +45,6 @@ def profile_v(request):
     return render(request, 'accounts/profile.html', context)
 
 
-# @login_required
-# def payment_list(request):
-#     payments = Payment.objects.filter(profile=request.user.profile).order_by('-transaction_time')
-#     context = {
-#         'payments': payments
-#     }
-#     return render(request, 'accounts/payment_list.html', context)
-#
-#
-# @login_required
-# def payment_create(request):
-#     if request.method == 'POST':
-#         payment_form = PaymentForm(request.POST)
-#         if payment_form.is_valid():
-#             payment = payment_form.save(commit=False)
-#             payment.profile = request.user.profile
-#             payment.save()
-#             request.user.profile.deposit(payment.amount)
-#             return HttpResponseRedirect(reverse('accounts:payment_list'))
-#     else:
-#         payment_form = PaymentForm()
-#     context = {
-#         'payment_form': payment_form
-#     }
-#     return render(request, 'accounts/payment_create.html', context)
-#
-#
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
@@ -95,33 +61,72 @@ def edit_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     }
-    return render(request, 'accounts/edit_account.html', context)
+    return render(request, 'accounts/edit_profile.html', context)
 
 
 def make_user(request):
-    if request.method == 'POST':
-        add_user = AddUserForm(request.POST)
-        if add_user.is_valid():
-            add_user.save()
-            return HttpResponseRedirect(reverse('accounts:login'))
+    form = AddUserForm(request.POST)
+    if form.is_valid():
+        user = form.save()
+        user.refresh_from_db()
+        user.profile.phone = form.cleaned_data.get('phone')
+        user.profile.gender = form.cleaned_data.get('gender')
+        user.profile.birthday = form.cleaned_data.get('birthday')
+        user.profile.city = form.cleaned_data.get('city')
+        user.profile.address = form.cleaned_data.get('address')
+        user.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('accounts:profile')
     else:
-        add_user = AddUserForm()
+        form = AddUserForm()
         context = {
-            'add_user': add_user,
+            'form': form
         }
         return render(request, 'accounts/make_user.html', context)
 
 
-@login_required()
-def make_profile(request):
+@login_required
+def payment_list(request):
+    payments = Payment.objects.filter(profile=request.user.profile).order_by('-transaction_time')
+    context = {
+        'payments': payments
+    }
+    return render(request, 'accounts/payment_list.html', context)
+
+
+@login_required
+def new_payment(request):
     if request.method == 'POST':
-        add_profile = ProfileForm(request.POST)
-        if add_profile.is_valid():
-            add_profile.save()
-            return HttpResponseRedirect(reverse('accounts:make_profile'))
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            payment = form.save(commit=False)
+            payment.profile = request.user.profile
+            payment.save()
+            request.user.profile.increase_credit(payment.amount)
+            return HttpResponseRedirect(reverse('accounts:payment_list'))
     else:
-        add_profile = ProfileForm()
-        context = {
-            'add_profile': add_profile,
-        }
-        return render(request, 'accounts/make_profile.html', context)
+        form = PaymentForm
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/new_payment.html', context)
+
+
+@login_required
+def change_pass(request):
+    # if request.method == 'POST':
+    #     form = ChangePass(request.POST)
+    #     if form.is_valid():
+    #         payment = form.save(commit=False)
+    #         payment.profile = request.user.profile
+    #         payment.save()
+    #         request.user.profile.increase_credit(payment.amount)
+    #         return HttpResponseRedirect(reverse('accounts:payment_list'))
+    #
+    # context = {
+    #     'form': form
+    # }
+    return render(request, 'accounts/change_password.html', {})

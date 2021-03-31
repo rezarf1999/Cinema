@@ -1,10 +1,10 @@
-{% extends "ticketing/base_ticket_login_profile.html" %}
+{% extends "accounts/base_navbar.html" %}
 {% load static %}
 {% block title %}
     لیست بلیت ها
 {% endblock %}
 {% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static "ticketing/css/ticket.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/ticket.css" %}">
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
@@ -14,47 +14,48 @@
                 {% if ticket %}
                     <div class="row">
                         {% for t in ticket %}
-                            <div class="col-6">
-                            <div class="row">
-                                <div class="col-2 bg-light text-dark">
-                                    <section class="date">
-                                        <time>
-                                            <span>{{ t.showtime.start_time|date:"d b" }}</span>
-                                            <span>{{ t.showtime.start_time|date:"Y" }}</span>
-                                        </time>
-                                    </section>
-                                </div>
-                                <div class="col-10 card-cont bg-dark text-light">
-                                    <div class="text-right">
-                                        <p>
-                                            <i class="fa fa-film"></i>
-                                            فیلم :
-                                            {{ t.showtime.movie.name }}
-                                        </p>
-                                        <p>
-                                            <i class="fa fa-building"></i>
-                                            سینما :
-                                            {{ t.showtime.cinema.name }}
-                                        </p>
-                                        <p>
+                            <div class="col-md-5 mb-5 ml-auto">
+                                <div class="row">
+                                    <div class="col-2 bg-light text-dark">
+                                        <section class="date">
+                                            <time>
+                                                <span>{{ t.showtime.start_time|date:"d b" }}</span>
+                                                <span>{{ t.showtime.start_time|date:"Y" }}</span>
+                                            </time>
+                                        </section>
+                                    </div>
+                                    <div class="col-10 card-cont bg-dark text-light">
+                                        <div class="text-right">
+                                            <p>
+                                                <i class="fa fa-film"></i>
+                                                فیلم :
+                                                {{ t.showtime.movie.name }}
+                                            </p>
+                                            <p>
+                                                <i class="fa fa-building"></i>
+                                                سینما :
+                                                {{ t.showtime.cinema.name }}
+                                            </p>
+                                            <p>
 
-                                            <i class="fa fa-chair"></i>
-                                            تعداد :
-                                            {{ t.person_count }}
-                                            نفر
-                                        </p>
+                                                <i class="fa fa-chair"></i>
+                                                تعداد :
+                                                {{ t.person_count }}
+                                                نفر
+                                            </p>
 
-                                        <p>
-                                            <i class="fas fa-clock"></i>
-                                            زمان :
-                                            <span>{{ t.showtime.start_time|date:"l  ساعت H:i" }}</span>
-                                        </p>
+                                            <p>
+                                                <i class="fas fa-clock"></i>
+                                                زمان :
+                                                <span>{{ t.showtime.start_time|date:"l  ساعت H:i" }}</span>
+                                            </p>
                                         </div>
-                                        <a class="btn btn-secondary btn-outline-light text-center text-left" href="{% url "ticketing:ticket_details" ticket_id=t.pk %}">
+                                        <a class="btn btn-secondary btn-outline-light text-center text-left"
+                                           href="{% url "ticketing:ticket_details" ticket_id=t.pk %}">
                                             جزئیات
-                                        <i class="fas fa-angle-double-left"></i>
+                                            <i class="fas fa-angle-double-left"></i>
                                         </a>
-
+                                    </div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -66,4 +67,5 @@
                 {% endif %}
         </div>
     </div>
+
 {% endblock %}

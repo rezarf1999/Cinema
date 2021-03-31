@@ -7,6 +7,7 @@
 
 .card {
     background-color: rgba(105, 105, 105, 0.5);
+    margin-bottom: 10px;
 }
 
 .card-header, .card-footer {

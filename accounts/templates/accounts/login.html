@@ -1,11 +1,14 @@
-{% extends "ticketing/base_ticket_login_profile.html" %}
+{% extends "accounts/base_navbar.html" %}
 {% load static %}
 {% block title %}صفحه ورود{% endblock %}
 {% block extra_css %}
-    <style>body{background-image: url({% static  'main_picture/forestbridge.jpg' %})</style>
-    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/login.css' %}">{% endblock %}
+    <style>body {
+        background-image: url({% static  'main_picture/forestbridge.jpg' %})
+    }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/login_new-payment_change-pass.css' %}">{% endblock %}
 {% block content %}
-    <div class="container-fluid align-content-center" >
+    <div class="container-fluid align-content-center">
         <div class="d-flex justify-content-center h-100">
             <div class="card mt-5" style="width: 500px;height: 400px">
                 <div class="card-header">
@@ -45,7 +48,7 @@
                 </div>
                 <div class="card-footer ">
                     <div class="d-flex justify-content-center links text-light">
-                        <a class="text-light font-weight-bold" href="#">ساخت حساب</a>
+                        <a class="text-light font-weight-bold" href="{% url 'accounts:make_user' %}">ساخت حساب</a>
                         عضو نیستید؟
                     </div>
                 </div>

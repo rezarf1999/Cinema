@@ -1,20 +1,26 @@
-{% extends "ticketing/base_page.html" %}
+{% extends "ticketing/base_ticketing.html" %}
 {% load static %}
+
+{# title #}
 {% block title %}
     سانس ها
 {% endblock %}
 
+
+{# main image #}
 {% block  main_image %}
     <img class="card-img" style="height: 220px" src="{% static 'main_picture/showtime.jpg' %}"
          alt="CINEMA TICKET ONLINE (CTO)">
 {% endblock %}
 
+
+{#cintent-title#}
 {% block content_title %}
     فهرست سانس ها
 {% endblock %}
 
+{# navbar-buttons #}
 {% block buttons %}
-
     <a class="btn btn-outline-light" href="{% url "ticketing:movie_list" %}">
         <i class="fas fa-film "></i>
         فیلم ها
@@ -26,12 +32,37 @@
     </a>
 {% endblock %}
 
-
-
+{# main content #}
 {% block content %}
     <div class="row p-2 text-dark" dir="rtl">
         <div class="col">
             {% if showtime %}
+
+                {#filters_form#}
+                <div >
+                    <form method="get" action="">
+                        <div class="border mb-2 p-2 text-center">
+                            <div class="form-row text-light text-center mb-2">
+
+                                <div class="col-3">
+                                    جستجو بر اساس فیلم
+                                    {{ form.movie_name }}</div>
+                                <div class="col-3">
+                                    جستجو برا اساس سینما
+                                    {{ form.cinema_name }}
+                                </div>
+                                <div class="col-2 mt-4">
+                                    فقط بلیت های فعال
+                                    {{ form.sale_open }}
+                                </div>
+
+                                <button type="submit" class="mt-4 btn btn-outline-light"><i
+                                        class="fas fa-search fa-flip-horizontal"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="row">
                     {% for s in showtime %}
                         <div class="col-md-4 mb-2" dir="rtl">
@@ -55,11 +86,11 @@
                                     </p>
                                     <p class="card-text">
                                         ظرفیت باقیمانده :
-                                        {{ s.salable_seats }}
+                                        {{ s.free_seats }}
                                     </p>
                                     {% if s.status == s.sale_start %}
 
-                                    <a href="{% url 'ticketing:buy_ticket' showtime_id=s.id %}" class="btn btn-sm  float-left btn
+                                        <a href="{% url 'ticketing:buy_ticket' showtime_id=s.id %}" class="btn btn-sm  float-left btn
                                     btn-info ">خرید بلیت<i class=" fas fa-angle-double-left"></i></a>
                                     {% else %}
                                         <a href="#" class="btn btn-sm  float-left btn
