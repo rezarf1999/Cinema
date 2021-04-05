@@ -153,18 +153,27 @@
             </div>
 
 
-            <footer class="modal-footer text-center bg-light text-dark">
-
-                <p class="mr-4">نام و نام خانوادگی : رضا فرجی</p>
-                <p class="mr-4">استاد راهنما : آقای مهندس نوید حاتمی</p>
-                <p class="mr-4">پروژه پایانی کارشناسی</p>
-                <br>
-
-            </footer>
-            <div class="mt-4 text-center">
+            <footer class="mt-1 text-center card-footer p-3">
                 {% block extera-footer %}
                 {% endblock %}
-            </div>
+                <p>راه های ارتباطی</p>
+                <p>
+                    پیام کوتاه : 09032898874
+                    <i class="fas fa-envelope"></i>
+                </p>
+                <p>
+                    شماره تماس : 09032898874
+                    <i class="fas fa-phone"></i>
+                </p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12299.620897429359!2d45.036072569788004!3d37.50775769592729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x400551819ef5bb65%3A0xa11f2aa91c126a06!2sUrmia%20Citadium%20Shopping%20Center!5e0!3m2!1sen!2s!4v1617287269345!5m2!1sen!2s"
+                        width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="border-top p-2">
+                    <p class="">نام و نام خانوادگی : رضا فرجی</p>
+                    <p class="">استاد راهنما : آقای مهندس نوید حاتمی</p>
+                    <p class="">پروژه پایانی کارشناسی</p>
+                </div>
+            </footer>
+
 
         </div>
 
@@ -181,10 +190,10 @@
                style="text-align: right;">صفحه اصلی</a>
             <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
                style="text-align: right;">
-                اخبار
+                لینک تبلیغاتی
             </a>
-            <a href="#" class="nav-item btn-block btn-outline-light p-2 pr-3"
-               style="text-align: right;">About</a>
+            <a href="{% url 'ticketing:about' %}" class="nav-item btn-block btn-outline-light p-2 pr-3"
+               style="text-align: right;">About project</a>
         </div>
     </div>
 </div>

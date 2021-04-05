@@ -94,20 +94,19 @@ class Ticket(models.Model):
         return '{}-{}-{}-{}'.format(self.showtime.movie, self.showtime, self.person_count, self.customer)
 
 
-
-class Movie(models.Model):
-    # movie model
+class News(models.Model):
+    # news model
 
     class Meta:
-        verbose_name = 'فیلم'
-        verbose_name_plural = 'فیلم'
+        verbose_name = 'خبر'
+        verbose_name_plural = 'خبر'
 
-    name = models.CharField('نام فیلم', max_length=100)
-    director = models.CharField('کارگردان', max_length=50)
-    cover = models.ImageField('عکس', upload_to='Movie_Covers/', null=False, blank=False)
-    length = models.IntegerField('مدت فیلم')
-    year = models.IntegerField('سال ساخت')
-    description = models.TextField('توضیحات')
+    news_id = models.AutoField(primary_key=True, verbose_name='کد خبر')
+    title = models.CharField('عنوان خبر', max_length=100)
+    subject = models.CharField('موضوع خبر', max_length=50)
+    image = models.ImageField('عکس', upload_to='News_Images/', null=False, blank=False)
+    time = models.DateTimeField('زمان خبر')
+    text = models.TextField('متن خبر')
 
     def __str__(self):
-        return self.name
+        return self.title

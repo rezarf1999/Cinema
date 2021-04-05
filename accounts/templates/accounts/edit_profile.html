@@ -4,7 +4,11 @@
 {% block extra_css %}
     <style>
         body {
-            background-image: url({% static  'main_picture/forestbridge.jpg' %})
+            background-image: url({% static  'main_picture/forestbridge.jpg' %});
+            background-repeat: no-repeat;
+            background-size: cover;
+
+
         }
     </style>
     <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/edit_profile.css' %}">{% endblock %}

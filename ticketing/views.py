@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from ticketing.forms import ShowTimeSearchForm, MovieSearchForm, CinemaSearchForm
-from ticketing.models import Movie, Cinema, ShowTime, Ticket
+from ticketing.models import Movie, Cinema, ShowTime, Ticket, News
 
 
 def movie_list(request):
@@ -110,10 +110,14 @@ def buy_ticket(request, showtime_id):
 
 
 def home(request):
-    movie = Movie.objects.all()[:3]
-    cinema = Movie.objects.all()[:3]
+    movie = Movie.objects.all()[:2]
+    news = News.objects.all()[:3]
     context = {
         'movie': movie,
-        'cinema': cinema
+        'news': news
     }
     return render(request, 'ticketing/home.html', context)
+
+
+def about(request):
+    return render(request, 'ticketing/about.html', {})

@@ -1,0 +1,137 @@
+{% extends "accounts/base_navbar.html" %}
+{% load static %}
+{% block title %}
+    درباره پروژه
+{% endblock %}
+{% block extra_css %}
+    <style>
+        p {
+            font-size: medium;
+
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+    <h3 class="text-right mt-3 mb-3">درباره پروژه</h3>
+        <div class="row m-2">
+            <div class="col-4">
+                <div class="card text-right bg-secondary text-light" dir="rtl">
+                    <img class="card-img-top"
+                         src="{% static 'main_picture/student.jpg' %}"
+                         alt="Card image cap">
+                    <div class="card-header">
+                        مشخصات دانشجو
+                    </div>
+                    <div class="card-body">
+                        <span>
+                            <i class="fas fa-id-card-alt"></i>
+                            کد دانشجویی :
+                        </span>
+                        <p> 98121003111020 </p>
+                        <span>
+                            <i class="fas fa-user"></i>
+                            نام و نام خانوادگی :
+                        </span>
+                        <p>رضا فرجی</p>
+                        <span>
+                            <i class="fas fa-id-card"></i>
+                            کد ملی :
+                        </span>
+                        <p>2741581770</p>
+
+                        <span>
+                            <i class="fas fa-university"></i>
+                            دانشگاه :
+                        </span>
+                        <p>دانشگاه فنی و حرفه ای شماره استان آذربایجان شرقی </p>
+
+                        <span>
+                            <i class="fa fa-instagra" style="font-size:24px"></i>
+                           شبکه های اجتماعی :
+                        </span>
+                        <p>reza_faraji_rf</p>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-4">
+                <div class="card text-right bg-secondary text-light" dir="rtl">
+                    <img class="card-img-top"
+                         src="{% static 'main_picture/master.jpg' %}"
+                         alt="Card image cap">
+
+                    <div class="card-header">
+                        مشخصات استاد
+                    </div>
+                    <div class="card-body">
+                         <span><i class="fas fa-user"></i>
+                            نام و نام خانوادگی :
+                        </span>
+                        <p>نوید حاتمی</p>
+                        <span>
+                            <i class="fas fa-university"></i>
+                            دانشگاه :
+                        </span>
+                        <p>دانشگاه فنی و حرفه ای شماره استان آذربایجان شرقی </p>
+
+
+                        <span>
+                           شبکه های اجتماعی :
+                        </span>
+                        <p>navid.hatami97</p>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card text-right bg-secondary text-light" dir="rtl">
+                    <img class="card-img-top"
+                         src="{% static 'main_picture/main.jpg' %}"
+                         alt="Card image cap">
+                    <div class="card-header">
+                        مشخصات پروژه
+                    </div>
+
+                    <div class="card-body">
+                         <span>
+                            عنوان پروژه
+                        </span>
+                        <p>سیستم فروش بلیت سینما(CTO)</p>
+                        <span>
+                            frontend:
+                        </span>
+                        <p> HTML,BootStrap,CSS </p>
+                        <span>
+                            backend:
+                        </span>
+                        <p>Django</p>
+
+                        <span>
+                            استاد راهنما :
+                        </span>
+                        <p>آقای مهندس نوید حاتمی</p>
+                        <span>
+                            برنامه نویس :
+                        </span>
+                        <p>رضا فرجی</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -74,48 +74,61 @@
     <div class="row m-1 text-center">
         <div class="col-4 bg-dark text-light">
             <p>فیلم های در حال اکران</p>
-                {% for m in movie %}
-                    <div class="card mb-2 border-dark" style="text-align: right">
-                        <img class="card-img-top" style="height: 100%;width: 100%" src="{{ m.cover.url }}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title pb-1 border-bottom">{{ m.name }}</h5>
-                            <p class="card-text border-bottom">
-                                کـارگـردان :
-                                {{ m.director }}
+            {% for m in movie %}
+                <div class="card mb-2 border-dark text-dark" style="text-align: right">
+                    <img class="card-img-top" style="height: 100%;width: 100%" src="{{ m.cover.url }}"
+                         alt="{{ m.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title pb-1 border-bottom">{{ m.name }}</h5>
+                        <p class="card-text border-bottom">
+                            کـارگـردان :
+                            {{ m.director }}
 
-                            </p>
-                            <p class="card-text border-bottom">
-                                سال ساخت :
-                                {{ m.year }}
-                            </p>
-                            <a href="{% url "ticketing:movie_details" movie_id=m.pk %}"
-                               class="btn btn-dark btn-sm float-left border-bottom">
-                                بیشتر...</a>
-                        </div>
+                        </p>
+                        <p class="card-text border-bottom">
+                            سال ساخت :
+                            {{ m.year }}
+                        </p>
+                        <a href="{% url "ticketing:movie_details" movie_id=m.pk %}"
+                           class="btn btn-dark btn-sm float-left border-bottom">
+                            بیشتر...</a>
                     </div>
+                </div>
 
 
-                {% endfor %}
+            {% endfor %}
 
         </div>
 
-        <div class="col-6 bg-light">
-            <p>بهترین سینما ها</p>
+        <div class="col-8 bg-light">
+            <p>اخبار</p>
+            {% for n in news %}
+
+                <div class="card mb-3" style="max-width: 540px;" dir="rtl">
+                    <div class="row no-gutters">
+                        <div class="col-md-4 text-right">
+                            <img src="{{ n.image.url }}" class="card-img" style="height: 100%" alt="{{ n.title }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-right">
+                                <h5 class="card-title">{{ n.title }}</h5>
+                                <p class="card-text">موضوع :
+                                    {{ n.subject }}</p>
+                                <p class="card-text">
+                                    {{ n.text | slice:':150' }}...</p>
+                                <p class="card-text"><small class="text-muted">{{ n.time }}</small></p>
+                                <a href="#" class="text-left">ادامه...</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
 
 {% block extera-footer %}
-    <p>راه های ارتباطی</p>
-    <p>
-        پیام کوتاه : 09032898874
-        <i class="fas fa-envelope"></i>
-    </p>
-    <p>
-        شماره تماس : 09032898874
-        <i class="fas fa-phone"></i>
-    </p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12299.620897429359!2d45.036072569788004!3d37.50775769592729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x400551819ef5bb65%3A0xa11f2aa91c126a06!2sUrmia%20Citadium%20Shopping%20Center!5e0!3m2!1sen!2s!4v1617287269345!5m2!1sen!2s"
-            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
 {% endblock %}
