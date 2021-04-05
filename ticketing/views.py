@@ -110,4 +110,10 @@ def buy_ticket(request, showtime_id):
 
 
 def home(request):
-    return render(request, 'ticketing/home.html', {})
+    movie = Movie.objects.all()[:3]
+    cinema = Movie.objects.all()[:3]
+    context = {
+        'movie': movie,
+        'cinema': cinema
+    }
+    return render(request, 'ticketing/home.html', context)

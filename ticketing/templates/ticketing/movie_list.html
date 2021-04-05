@@ -50,19 +50,19 @@
                                      alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title pb-1 border-bottom">{{ m.name }}</h5>
-                                    <p class="card-text">
+                                    <p class="card-text border-bottom">
                                         کـارگـردان :
                                         {{ m.director }}
 
                                     </p>
-                                    <p class="card-text">
+                                    <p class="card-text border-bottom">
                                         سال ساخت :
                                         {{ m.year }}
 
 
                                     </p>
                                     <a href="{% url "ticketing:movie_details" movie_id=m.pk %}"
-                                       class="btn btn-dark btn-sm float-left">
+                                       class="btn btn-dark btn-sm float-left border-bottom">
                                         بیشتر...</a>
                                 </div>
                             </div>

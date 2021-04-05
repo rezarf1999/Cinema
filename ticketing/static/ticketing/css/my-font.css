@@ -1,5 +1,6 @@
 body {
-    font-family: my-Font
+    font-family: my-Font;
+    font-size: medium;
 }
 
 @font-face {

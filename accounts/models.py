@@ -54,3 +54,6 @@ class Payment(models.Model):
     amount = models.PositiveIntegerField('مبلغ')
     transaction_time = models.DateTimeField('زمان تراکنش', auto_now_add=True)
     transaction_code = models.CharField('شماره تراکنش', max_length=30)
+
+
+

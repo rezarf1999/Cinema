@@ -1,9 +1,9 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
+
 from accounts.choices import gender_choice
 from accounts.models import Profile, Payment
-from ticketing.models import ShowTime
 
 
 class UserForm(UserChangeForm):
@@ -62,3 +62,15 @@ class PaymentForm(forms.ModelForm):
             'transaction_code': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
+
+class ChangePassForm(PasswordChangeForm):
+    old_password = forms.CharField(label='گذرواژه قدیمی', max_length=100,
+                                   widget=forms.PasswordInput(attrs={'type': 'password', 'class': 'form-control'}))
+    new_password1 = forms.CharField(label='گذرواژه جدید', max_length=100,
+                                    widget=forms.PasswordInput(attrs={'type': 'password', 'class': 'form-control'}))
+    new_password2 = forms.CharField(label='تایید گذرواژه جدید', max_length=100,
+                                    widget=forms.PasswordInput(attrs={'type': 'password', 'class': 'form-control'}))
+
+    class Meta(forms.Form):
+        model = User
+        fields = ['old_password', 'new_password1', 'new_password2']

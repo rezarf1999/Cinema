@@ -92,3 +92,22 @@ class Ticket(models.Model):
 
     def __str__(self):
         return '{}-{}-{}-{}'.format(self.showtime.movie, self.showtime, self.person_count, self.customer)
+
+
+
+class Movie(models.Model):
+    # movie model
+
+    class Meta:
+        verbose_name = 'فیلم'
+        verbose_name_plural = 'فیلم'
+
+    name = models.CharField('نام فیلم', max_length=100)
+    director = models.CharField('کارگردان', max_length=50)
+    cover = models.ImageField('عکس', upload_to='Movie_Covers/', null=False, blank=False)
+    length = models.IntegerField('مدت فیلم')
+    year = models.IntegerField('سال ساخت')
+    description = models.TextField('توضیحات')
+
+    def __str__(self):
+        return self.name

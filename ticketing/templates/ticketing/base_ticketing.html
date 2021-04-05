@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/my-font.css" %}">
-
+    {% block extera_css %}
+    {% endblock %}
 </head>
 <body data-spy="scroll" data-offset="60">
 
@@ -28,6 +29,7 @@
                     aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <a class="navbar-brand" style="font-size: medium">Cinema Ticket Online(CTO)</a>
 
             {% if  user.is_authenticated %}
@@ -87,9 +89,13 @@
             <div style="font-size: medium" class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
                 <div class="btn-group navbar-nav mt-2 mt-lg-0 ml-auto justify-content">
-                    {% block buttons %}
-                    {% endblock %}
 
+                    {% block buttons %}
+
+                    {% endblock %}
+                    <a class="btn btn-outline-light" href="{% url "ticketing:home" %}">
+                        <i class="fas fa-home"></i>
+                    </a>
                 </div>
 
             </div>
@@ -114,8 +120,10 @@
                             {% endif %}
                         </div>
                         <div class="col-6">
-                            <h2 class="text-light text-right mr-3">سیستم فروش بلیت سینما
-                            </h2>
+                            {% block header %}
+                                <h2 class="text-light text-right mr-3">سیستم فروش بلیت سینما
+                                </h2>
+                            {% endblock %}
 
                         </div>
                     </div>
@@ -146,10 +154,17 @@
 
 
             <footer class="modal-footer text-center bg-light text-dark">
+
                 <p class="mr-4">نام و نام خانوادگی : رضا فرجی</p>
                 <p class="mr-4">استاد راهنما : آقای مهندس نوید حاتمی</p>
                 <p class="mr-4">پروژه پایانی کارشناسی</p>
+                <br>
+
             </footer>
+            <div class="mt-4 text-center">
+                {% block extera-footer %}
+                {% endblock %}
+            </div>
 
         </div>
 
@@ -174,7 +189,6 @@
     </div>
 </div>
 
-<script src="{% static "ticketing/js/My-js.js" %}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 

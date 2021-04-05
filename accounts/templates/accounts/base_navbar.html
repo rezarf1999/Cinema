@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {#title#}
     <title>{% block title %}{% endblock %}</title>
 
@@ -93,6 +93,9 @@
         <a class="btn btn-outline-light" href="{% url "ticketing:movie_list" %}">
             <i class="fas fa-film "></i>
             فیلم ها
+        </a>
+        <a class="btn btn-outline-light" href="{% url "ticketing:home" %}">
+            <i class="fas fa-home"></i>
         </a>
     </div>
 </nav>

@@ -1,20 +1,21 @@
 {% extends "accounts/base_navbar.html" %}
 {% block title %}
-
+صفحه جزئیات سینما
 {% endblock %}
 
 {% block extra_css %}
+
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="card mb-2">
 
-            <div class="card-header">
+            <div class="card-header text-light" style="background-color:#607d8b">
                 <h2 class="h1 text-center">سیستم فروش بلیت سینما</h2>
             </div>
 
-            <div class="card-body">
+            <div class="card-body bg-dark text-light">
                 <div class="row">
                     <div class="col-sm-4">
                         <img src="{{ cinema.image.url }}" alt="عکس سینما" class="img-thumbnail"
@@ -74,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-center">
+            <div class="card-footer text-center bg-secondary text-white">
                 <p>CinemaTicketOnline(CTO)</p>
 
             </div>

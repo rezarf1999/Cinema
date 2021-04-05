@@ -9,80 +9,78 @@
 {% endblock %}
 
 {% block content %}
-    <div class="jumbotron" style="margin-top:30px">
-        <div class="text-dark" style="height: 60px">
-            <h1 class="h1 text-center">سیستم فروش بلیت سینما</h1>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col">
-                <hr>
+
+    <div class="container-fluid">
+        <div class="card mb-2">
+
+            <div class="card-header text-light" style="background-color:#607d8b">
+                <h2 class="h1 text-center">سیستم فروش بلیت سینما</h2>
             </div>
-        </div>
+
+            <div class="card-body bg-dark text-light">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="{{ movie.cover.url }}" alt="کاور فیلم" class="img-thumbnail"
+                             style="box-sizing: border-box;width: 300px;height: 400px">
+                    </div>
 
 
-        <br>
-        <br>
-        <div class="row text-dark" style="direction: rtl">
-            <div class="col-sm-8">
-                <h3>
-                    {{ movie.name }}
-                </h3>
-                <br>
+                    <div class="col-sm-8 text-right" dir="rtl">
 
-                <div class="form-group">
-
-                    <label for="director">
-                        <b>
-                            کارگردان :
-                        </b>
-                    </label>
-                    <output type="text">{{ movie.director }}</output>
-                    <br>
-                    <label for="year">
-                        <b>
-                            سال ساخت :
-                        </b>
-                    </label>
-                    <output type="text">{{ movie.year }}</output>
-                    <br>
-                    <label for="time">
-                        <b>
-                            مدت زمان فیلم :
-                        </b>
-                    </label>
-                    <output type="text">
-                        {{ movie.length }}
-                        دقیقه
-                    </output>
-                    <br>
-                    <label for="description">
-                        <b>
-                            توضیحات فیلم:
-                        </b>
-                    </label>
-                    <textarea class="form-control font-weight-bold" rows="5" style="width: 70%; resize: none"
-                              disabled>{{ movie.description }}</textarea>
+                        <div class="row border-bottom mb-3">
+                            <div class="col-md-2 ">
+                                <i class="fas fa-film"></i>
+                                <label>فیلم :</label>
+                            </div>
+                            <div class="col-md-10">
+                                <p>{{ movie.name }}</p>
+                            </div>
+                        </div>
+                        <div class="row border-bottom mb-3">
+                            <div class="col-md-2 ">
+                                <i class="fas fa-user-circle"></i>
+                                <label>کارگردان :</label>
+                            </div>
+                            <div class="col-md-10">
+                                <p>{{ movie.director }}</p>
+                            </div>
+                        </div>
+                        <div class="row border-bottom mb-3">
+                            <div class="col-md-2 ">
+                                <i class="fas fa-clock"></i>
+                                <label>مدت فیلم :</label>
+                            </div>
+                            <div class="col-md-10">
+                                <p>{{ movie.length }}
+                                    دقیقه
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row border-bottom mb-3">
+                            <div class="col-md-2 ">
+                                <i class="fas fa-calendar"></i>
+                                <label>سال ساخت :</label>
+                            </div>
+                            <div class="col-md-10">
+                                <p>{{ movie.year }}</p>
+                            </div>
+                        </div>
+                        <div class="row border-bottom">
+                            <div class="col-md-2 ">
+                                <i class="fas fa-book"></i>
+                                <label>خلاصه فیلم :</label>
+                            </div>
+                            <div class="col-md-10">
+                                <p>{{ movie.description }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <img src="{{ movie.cover.url }}" alt="کاور فیلم" class="img-thumbnail"
-                     style="box-sizing: border-box;width: 300px;height: 400px">
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col">
-                <hr>
-            </div>
-        </div>
-        <div class="row align-content-center">
-            <div class="col text-white text-center" style="background-color: #491217">
-
-                <p class="text-white">محل قرار دادن تبلیغات</p>
+            <div class="card-footer text-center bg-secondary text-white">
+                <p>CinemaTicketOnline(CTO)</p>
 
             </div>
         </div>
     </div>
-
 {% endblock %}

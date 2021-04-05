@@ -1,10 +1,12 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from accounts.forms import ProfileForm, UserForm, AddUserForm, PaymentForm
+from accounts.forms import ProfileForm, UserForm, AddUserForm, PaymentForm, ChangePassForm
 from accounts.models import Profile, Payment
 
 
@@ -115,18 +117,18 @@ def new_payment(request):
     return render(request, 'accounts/new_payment.html', context)
 
 
-@login_required
 def change_pass(request):
-    # if request.method == 'POST':
-    #     form = ChangePass(request.POST)
-    #     if form.is_valid():
-    #         payment = form.save(commit=False)
-    #         payment.profile = request.user.profile
-    #         payment.save()
-    #         request.user.profile.increase_credit(payment.amount)
-    #         return HttpResponseRedirect(reverse('accounts:payment_list'))
-    #
-    # context = {
-    #     'form': form
-    # }
-    return render(request, 'accounts/change_password.html', {})
+    if request.method == 'POST':
+        form = ChangePassForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = ChangePassForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
