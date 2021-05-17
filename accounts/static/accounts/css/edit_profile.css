@@ -1,3 +1,7 @@
+body {
+    font-family: my-Font;
+    font-size: medium;
+}
 
 .container-fluid {
     background-size: cover;
@@ -34,4 +38,9 @@ label{
 
     color: whitesmoke;
     font-size: medium;
+}
+@font-face {
+    font-family: 'IranSans';
+    src: local('my-font'),
+    url('../webfonts/Iranian Sans.ttf') format("truetype");
 }

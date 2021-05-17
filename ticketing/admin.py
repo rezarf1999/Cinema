@@ -29,7 +29,20 @@ class ShowTimeAdmin(admin.ModelAdmin):
 
 admin.site.register(ShowTime, ShowTimeAdmin)
 
-admin.site.register(Ticket)
+
+class TicketAdmin(admin.ModelAdmin):
+    list_filter = ['showtime', 'buy_time', 'person_count']
+    search_fields = ['customer']
+    list_display = ['customer', 'showtime', 'buy_time']
 
 
-admin.site.register(News)
+admin.site.register(Ticket, TicketAdmin)
+
+
+class NewsAdmin(admin.ModelAdmin):
+    list_filter = ['subject', 'time']
+    search_fields = ['title']
+    list_display = ['title', 'subject', 'time']
+
+
+admin.site.register(News, NewsAdmin)

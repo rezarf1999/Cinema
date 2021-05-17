@@ -51,11 +51,6 @@
 
 {% block buttons %}
 
-    <a class="btn btn-outline-light" href="{% url "ticketing:showtime_list" %}">
-        <i class="fas fa-clock"></i>
-        سانـس ها
-    </a>
-
     <a class="btn btn-outline-light" href="{% url "ticketing:cinema_list" %}">
         <i class="fas fa-building"></i>
         سینـماهـا
@@ -63,6 +58,10 @@
     <a class="btn btn-outline-light" href="{% url "ticketing:showtime_list" %}">
         <i class="fas fa-building"></i>
         سانس ها
+    </a>
+    <a class="btn btn-outline-light" href="{% url "ticketing:movie_list" %}">
+        <i class="fas fa-film"></i>
+        فیلم ها
     </a>
 {% endblock %}
 
@@ -77,7 +76,7 @@
             {% for m in movie %}
                 <div class="card mb-2 border-dark text-dark" style="text-align: right">
                     <img class="card-img-top" style="height: 100%;width: 100%" src="{{ m.cover.url }}"
-                         alt="{{ m.name}}">
+                         alt="{{ m.name }}">
                     <div class="card-body">
                         <h5 class="card-title pb-1 border-bottom">{{ m.name }}</h5>
                         <p class="card-text border-bottom">
